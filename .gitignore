@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/java,linux,windows,macos,intellij+all,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,linux,windows,macos,intellij+all,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/intellij+all,linux,windows,macos,java
+# Edit at https://www.toptal.com/developers/gitignore?templates=intellij+all,linux,windows,macos,java
 
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -164,31 +164,6 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-
-# Local History for Visual Studio Code
-.history/
-
-# Built Visual Studio Code Extensions
-*.vsix
-
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
-.ionide
-
-# Support for Project snippet scope
-.vscode/*.code-snippets
-
-# Ignore code-workspaces
-*.code-workspace
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -215,4 +190,32 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/java,linux,windows,macos,intellij+all,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/intellij+all,linux,windows,macos,java
+*.png
+*.properties
+
+
+# Created by https://www.toptal.com/developers/gitignore/api/maven
+# Edit at https://www.toptal.com/developers/gitignore?templates=maven
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# End of https://www.toptal.com/developers/gitignore/api/maven
+
