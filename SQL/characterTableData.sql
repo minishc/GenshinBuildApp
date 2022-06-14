@@ -18,7 +18,7 @@ VALUES ('Razor', 'Claymore', 234, 11962, 751, 30);
 INSERT INTO genshinApp.`character`(name, weaponType, baseAttack, baseHP, baseDef, baseAttackPercent)
 VALUES ('Amber', 'Bow', 223, 9461, 601, 24),
 ('Chongyun', 'Claymore', 223, 10984, 648, 24),
-('Fischl', 'Bow', 223, 9461, 601, 24),
+('Fischl', 'Bow', 244, 9189, 594, 24),
 ('Kujou Sara', 'Bow', 195, 9570, 628, 24),
 ('Rosaria', 'Polearm', 240, 12289, 710, 24),
 ('Shenhe', 'Polearm', 304, 12993, 830, 28.8),
