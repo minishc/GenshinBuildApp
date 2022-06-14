@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Entity
 public class Character {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    long id;
     String name;
     String weaponType;
     String iconImage;
@@ -35,11 +35,10 @@ public class Character {
     double baseEnergyRecharge;
     double baseHealingPercent;
     
-    public Character(String name, String weaponType, String iconImage, int baseAttack,
-                     int baseDefense, int baseHP, String scaleStat, double maxValue) {
+    public Character(String name, String weaponType, int baseAttack, int baseDefense,
+                     int baseHP, String scaleStat, double maxValue) {
         this.name = name;
         this.weaponType = weaponType;
-        this.iconImage = iconImage;
         this.baseAttack = baseAttack;
         this.baseDefense = baseDefense;
         this.baseHP = baseHP;

@@ -15,7 +15,7 @@ import java.util.List;
 public class Artifact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    long id;
     String set;
     String slot;
 

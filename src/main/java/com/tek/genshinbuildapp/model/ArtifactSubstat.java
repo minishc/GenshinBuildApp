@@ -18,7 +18,7 @@ import javax.persistence.Id;
 public class ArtifactSubstat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    long id;
     String statName;
     String statValue;
 }

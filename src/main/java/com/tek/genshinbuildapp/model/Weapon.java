@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class Weapon {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    long id;
     String name;
     String weaponType;
     int baseAttack;

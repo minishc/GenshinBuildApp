@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Build {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    long id;
     @ManyToOne
     Character character;
     @ManyToOne
