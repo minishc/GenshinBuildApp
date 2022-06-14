@@ -11,5 +11,4 @@ class GenshinBuildAppTests {
 	void contextLoads() {
 		Assertions.assertTrue(true);
 	}
-
 }
