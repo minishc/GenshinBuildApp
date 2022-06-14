@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeaponSecondaryStatRepository extends JpaRepository<WeaponSecondaryStat, Integer> {
+    WeaponSecondaryStat findByStatNameAndStatValue(String statName, double statValue);
 }

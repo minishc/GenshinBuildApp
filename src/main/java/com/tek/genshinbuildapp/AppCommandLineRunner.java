@@ -1,7 +1,10 @@
 package com.tek.genshinbuildapp;
 
 import com.tek.genshinbuildapp.model.Character;
+import com.tek.genshinbuildapp.model.WeaponSecondaryStat;
 import com.tek.genshinbuildapp.service.CharacterService;
+import com.tek.genshinbuildapp.service.WeaponSecondaryStatService;
+import com.tek.genshinbuildapp.service.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -13,10 +16,16 @@ import java.util.List;
 public class AppCommandLineRunner implements CommandLineRunner {
 
     private final CharacterService characterService;
+    private final WeaponSecondaryStatService secondaryStatService;
+    private final WeaponService weaponService;
 
     @Autowired
-    public AppCommandLineRunner(CharacterService characterService) {
+    public AppCommandLineRunner(CharacterService characterService,
+                                WeaponSecondaryStatService secondaryStatService,
+                                WeaponService weaponService) {
         this.characterService = characterService;
+        this.weaponService = weaponService;
+        this.secondaryStatService = secondaryStatService;
     }
 
     @Override
@@ -24,6 +33,10 @@ public class AppCommandLineRunner implements CommandLineRunner {
         populateCharacters();
     }
 
+    /**
+     * This method will populate the database with the existing characters as of
+     * the first event banner of patch 2.8
+     */
     private void populateCharacters() {
         List<Character> characters = new ArrayList<>();
         Character albedo = new Character("Albedo", "Sword", 251, 876, 13226, "baseElemDamage", 28.8);
@@ -219,5 +232,61 @@ public class AppCommandLineRunner implements CommandLineRunner {
         characters.add(zhongli);
 
         characterService.saveAll(characters);
+    }
+
+    /**
+     * This method will populate the database with the existing weapons up to the
+     * first event banner of patch 2.8
+     * Secondary stats have their own table in the database to reduce redundancy
+     */
+    private void populateWeapons() {
+
+    }
+
+    /**
+     * This method will populate the database with the existing possible secondary
+     * stat name/value combinations that exist as of the first event banner
+     * of patch 2.8
+     */
+    private void populateSecondaryStats() {
+        List<WeaponSecondaryStat> stats = new ArrayList<>();
+        stats.add(new WeaponSecondaryStat("ATK", 13.8));
+        stats.add(new WeaponSecondaryStat("ATK", 16.5));
+        stats.add(new WeaponSecondaryStat("ATK", 27.6));
+        stats.add(new WeaponSecondaryStat("ATK", 33.1));
+        stats.add(new WeaponSecondaryStat("ATK", 35.2));
+        stats.add(new WeaponSecondaryStat("ATK", 41.3));
+        stats.add(new WeaponSecondaryStat("ATK", 49.6));
+        stats.add(new WeaponSecondaryStat("ATK", 55.1));
+        stats.add(new WeaponSecondaryStat("CRIT DMG", 36.8));
+        stats.add(new WeaponSecondaryStat("CRIT DMG", 44.1));
+        stats.add(new WeaponSecondaryStat("CRIT DMG", 55.1));
+        stats.add(new WeaponSecondaryStat("CRIT DMG", 66.2));
+        stats.add(new WeaponSecondaryStat("CRIT DMG", 88.2));
+        stats.add(new WeaponSecondaryStat("CRIT Rate", 22.1));
+        stats.add(new WeaponSecondaryStat("CRIT Rate", 27.6));
+        stats.add(new WeaponSecondaryStat("CRIT Rate", 33.1));
+        stats.add(new WeaponSecondaryStat("CRIT Rate", 36.8));
+        stats.add(new WeaponSecondaryStat("CRIT Rate", 44.1));
+        stats.add(new WeaponSecondaryStat("DEF", 51.7));
+        stats.add(new WeaponSecondaryStat("DEF", 69));
+        stats.add(new WeaponSecondaryStat("Elemental Mastery", 55));
+        stats.add(new WeaponSecondaryStat("Elemental Mastery", 110));
+        stats.add(new WeaponSecondaryStat("Elemental Mastery", 165));
+        stats.add(new WeaponSecondaryStat("Elemental Mastery", 198));
+        stats.add(new WeaponSecondaryStat("Elemental Mastery", 221));
+        stats.add(new WeaponSecondaryStat("Energy Recharge", 30.6));
+        stats.add(new WeaponSecondaryStat("Energy Recharge", 36.8));
+        stats.add(new WeaponSecondaryStat("Energy Recharge", 45.9));
+        stats.add(new WeaponSecondaryStat("Energy Recharge", 55.1));
+        stats.add(new WeaponSecondaryStat("Energy Recharge", 61.3));
+        stats.add(new WeaponSecondaryStat("HP", 41.3));
+        stats.add(new WeaponSecondaryStat("HP", 49.6));
+        stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 20.7));
+        stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 34.5));
+        stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 41.3));
+        stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 51.7));
+        stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 69));
+
     }
 }

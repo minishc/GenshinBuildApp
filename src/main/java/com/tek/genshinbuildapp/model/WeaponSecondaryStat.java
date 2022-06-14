@@ -20,7 +20,7 @@ public class WeaponSecondaryStat {
     @NonNull
     String statName;
     @NonNull
-    String statValue;
+    double statValue;
 
     @ToString.Exclude
     @OneToMany(targetEntity = WeaponSecondaryStat.class)
