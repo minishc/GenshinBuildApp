@@ -1,5 +1,5 @@
 INSERT INTO genshinApp.`weaponSecondaryStat`(statname, statValue)
-VALUES ('ATK', 13.8),
+VALUES ('ATK', 13.8), --1
 ('ATK', 27.6),
 ('ATK', 33.1),
 ('ATK', 35.2),
@@ -8,7 +8,7 @@ VALUES ('ATK', 13.8),
 ('ATK', 55.1),
 ('CRIT DMG', 36.8),
 ('CRIT DMG', 44.1),
-('CRIT DMG', 55.1),
+('CRIT DMG', 55.1), --10
 ('CRIT DMG', 66.2),
 ('CRIT DMG', 88.2),
 ('CRIT Rate', 22.1),
@@ -18,7 +18,7 @@ VALUES ('ATK', 13.8),
 ('CRIT Rate', 44.1),
 ('DEF', 51.7),
 ('DEF', 69),
-('Elemental Mastery', 55),
+('Elemental Mastery', 55), --20
 ('Elemental Mastery', 110),
 ('Elemental Mastery', 165),
 ('Elemental Mastery', 198),
@@ -28,7 +28,7 @@ VALUES ('ATK', 13.8),
 ('Energy Recharge', 45.9),
 ('Energy Recharge', 55.1),
 ('Energy Recharge', 61.3),
-('HP', 41.3),
+('HP', 41.3),              --30
 ('HP', 49.6),
 ('Physical DMG Bonus', 20.7),
 ('Physical DMG Bonus', 34.5),

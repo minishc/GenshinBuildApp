@@ -1,6 +1,7 @@
 package com.tek.genshinbuildapp;
 
 import com.tek.genshinbuildapp.model.Character;
+import com.tek.genshinbuildapp.model.Weapon;
 import com.tek.genshinbuildapp.model.WeaponSecondaryStat;
 import com.tek.genshinbuildapp.service.CharacterService;
 import com.tek.genshinbuildapp.service.WeaponSecondaryStatService;
@@ -31,6 +32,8 @@ public class AppCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         populateCharacters();
+        populateSecondaryStats();
+        populateWeapons();
     }
 
     /**
@@ -240,7 +243,199 @@ public class AppCommandLineRunner implements CommandLineRunner {
      * Secondary stats have their own table in the database to reduce redundancy
      */
     private void populateWeapons() {
-
+        List<Weapon> weapons = new ArrayList<>();
+        weapons.add(new Weapon("Blackcliff Longsword", "Sword", 565,
+                                secondaryStatService.findByData("CRIT DMG", 36.8)));
+        weapons.add(new Weapon("Favonius Sword", "Sword", 454,
+                secondaryStatService.findByData("Energy Recharge", 61.3)));
+        weapons.add(new Weapon("Iron Sting", "Sword", 510,
+                secondaryStatService.findByData("Elemental Mastery", 165)));
+        weapons.add(new Weapon("Lion's Roar", "Sword", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Prototype Rancour", "Sword", 565,
+                secondaryStatService.findByData("Physical DMG Bonus", 34.5)));
+        weapons.add(new Weapon("Royal Longsword", "Sword", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Sacrificial Sword", "Sword", 454,
+                secondaryStatService.findByData("Energy Recharge", 61.3)));
+        weapons.add(new Weapon("The Alley Flash", "Sword", 620,
+                secondaryStatService.findByData("Elemental Mastery", 55)));
+        weapons.add(new Weapon("The Black Sword", "Sword", 510,
+                secondaryStatService.findByData("CRIT Rate", 27.6)));
+        weapons.add(new Weapon("The Flute", "Sword", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Sword of Descension", "Sword", 440,
+                secondaryStatService.findByData("ATK", 35.2)));
+        weapons.add(new Weapon("Festering Desire", "Sword", 510,
+                secondaryStatService.findByData("Energy Recharge", 45.9)));
+        weapons.add(new Weapon("Amenoma Kageuchi", "Sword", 608,
+                secondaryStatService.findByData("ATK", 55.1)));
+        weapons.add(new Weapon("Cinnabar Spindle", "Sword", 608,
+                secondaryStatService.findByData("DEF", 69)));
+        weapons.add(new Weapon("Aquila Favonia", "Sword", 674,
+                secondaryStatService.findByData("Physical DMG Bonus", 41.3)));
+        weapons.add(new Weapon("Skyward Blade", "Sword", 608,
+                secondaryStatService.findByData("Energy Recharge", 55.1)));
+        weapons.add(new Weapon("Summit Shaper", "Sword", 608,
+                secondaryStatService.findByData("ATK", 49.6)));
+        weapons.add(new Weapon("Primordial Jade Cutter", "Sword", 542,
+                secondaryStatService.findByData("CRIT Rate", 44.1)));
+        weapons.add(new Weapon("Freedom-Sworn", "Sword", 608,
+                secondaryStatService.findByData("Elemental Mastery", 198)));
+        weapons.add(new Weapon("Mistsplitter Reforged", "Sword", 674,
+                secondaryStatService.findByData("CRIT DMG", 44.1)));
+        weapons.add(new Weapon("Haran Geppaku Futsu", "Sword", 608,
+                secondaryStatService.findByData("CRIT Rate", 33.1)));
+        weapons.add(new Weapon("Whiteblind", "Claymore", 510,
+                secondaryStatService.findByData("DEF", 51.7)));
+        weapons.add(new Weapon("The Bell", "Claymore", 510,
+                secondaryStatService.findByData("HP", 41.3)));
+        weapons.add(new Weapon("Snow-Tombed Starsilver", "Claymore", 565,
+                secondaryStatService.findByData("Physical DMG Bonus", 34.5)));
+        weapons.add(new Weapon("Serpent Spine", "Claymore", 510,
+                secondaryStatService.findByData("CRIT Rate", 27.6)));
+        weapons.add(new Weapon("Sacrificial Greatsword", "Claymore", 565,
+                secondaryStatService.findByData("Energy Recharge", 30.6)));
+        weapons.add(new Weapon("Blackcliff Slasher", "Claymore", 510,
+                secondaryStatService.findByData("CRIT DMG", 55.1)));
+        weapons.add(new Weapon("Akuoumaru", "Claymore", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Rainslasher", "Claymore", 510,
+                secondaryStatService.findByData("Elemental Mastery", 165)));
+        weapons.add(new Weapon("Prototype Archaic", "Claymore", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Luxurious Sea-Lord", "Claymore", 454,
+                secondaryStatService.findByData("ATK", 55.1)));
+        weapons.add(new Weapon("Lithic Blade", "Claymore", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Katsuragikiri Nagamasa", "Claymore", 510,
+                secondaryStatService.findByData("Energy Recharge", 45.9)));
+        weapons.add(new Weapon("Favonius Greatsword", "Claymore", 454,
+                secondaryStatService.findByData("Energy Recharge", 61.3)));
+        weapons.add(new Weapon("Royal Greatsword", "Claymore", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Wolf's Gravestone", "Claymore", 608,
+                secondaryStatService.findByData("ATK", 49.6)));
+        weapons.add(new Weapon("Redhorn Stonethresher", "Claymore", 542,
+                secondaryStatService.findByData("CRIT DMG", 88.2)));
+        weapons.add(new Weapon("The Unforged", "Claymore", 608,
+                secondaryStatService.findByData("ATK", 49.6)));
+        weapons.add(new Weapon("Song of Broken Pines", "Claymore", 741,
+                secondaryStatService.findByData("Physical DMG Bonus", 20.7)));
+        weapons.add(new Weapon("Skyward Pride", "Claymore", 674,
+                secondaryStatService.findByData("Energy Recharge", 36.8)));
+        weapons.add(new Weapon("Dragonspine Spear", "Polearm", 454,
+                secondaryStatService.findByData("Physical DMG Bonus", 69)));
+        weapons.add(new Weapon("Dragon's Bane", "Polearm", 454,
+                secondaryStatService.findByData("Elemental Mastery", 221)));
+        weapons.add(new Weapon("Deathmatch", "Polearm", 454,
+                secondaryStatService.findByData("CRIT Rate", 36.8)));
+        weapons.add(new Weapon("Prototype Starglitter", "Polearm", 510,
+                secondaryStatService.findByData("Energy Recharge", 45.9)));
+        weapons.add(new Weapon("\"The Catch\"", "Polearm", 510,
+                secondaryStatService.findByData("Energy Recharge", 45.9)));
+        weapons.add(new Weapon("Blackcliff Pole", "Polearm", 510,
+                secondaryStatService.findByData("CRIT DMG", 55.1)));
+        weapons.add(new Weapon("Lithic Spear", "Polearm", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Kitain Cross Spear", "Polearm", 565,
+                secondaryStatService.findByData("Elemental Mastery", 110)));
+        weapons.add(new Weapon("Favonius Lance", "Polearm", 565,
+                secondaryStatService.findByData("Energy Recharge", 30.6)));
+        weapons.add(new Weapon("Crescent Pike", "Polearm", 565,
+                secondaryStatService.findByData("Physical DMG Bonus", 34.5)));
+        weapons.add(new Weapon("Royal Spear", "Polearm", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Wavebreaker's Fin", "Polearm", 620,
+                secondaryStatService.findByData("ATK", 13.8)));
+        weapons.add(new Weapon("Engulfing Lightning", "Polearm", 608,
+                secondaryStatService.findByData("Energy Recharge", 55.1)));
+        weapons.add(new Weapon("Staff of Homa", "Polearm", 608,
+                secondaryStatService.findByData("CRIT DMG", 66.2)));
+        weapons.add(new Weapon("Vortex Vanquisher", "Polearm", 608,
+                secondaryStatService.findByData("ATK", 49.6)));
+        weapons.add(new Weapon("Skyward Spine", "Polearm", 674,
+                secondaryStatService.findByData("Energy Recharge", 36.8)));
+        weapons.add(new Weapon("Primordial Jade Winged-Spear", "Polearm", 674,
+                secondaryStatService.findByData("CRIT Rate", 22.1)));
+        weapons.add(new Weapon("Calamity Queller", "Polearm", 741,
+                secondaryStatService.findByData("ATK", 16.5)));
+        weapons.add(new Weapon("Alley Hunter", "Bow", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("The Viridescent Hunt", "Bow", 510,
+                secondaryStatService.findByData("CRIT Rate", 27.6)));
+        weapons.add(new Weapon("The Stringless", "Bow", 510,
+                secondaryStatService.findByData("Elemental Mastery", 165)));
+        weapons.add(new Weapon("Sacrificial Bow", "Bow", 565,
+                secondaryStatService.findByData("Energy Recharge", 30.6)));
+        weapons.add(new Weapon("Rust", "Bow", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Royal Bow", "Bow", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Prototype Crescent", "Bow", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Predator", "Bow", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Mouun's Moon", "Bow", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Mitternachts Waltz", "Bow", 510,
+                secondaryStatService.findByData("Physical DMG Bonus", 51.7)));
+        weapons.add(new Weapon("Hamayumi", "Bow", 454,
+                secondaryStatService.findByData("ATK", 55.1)));
+        weapons.add(new Weapon("Favonius Warbow", "Bow", 454,
+                secondaryStatService.findByData("Energy Recharge", 61.3)));
+        weapons.add(new Weapon("Compound bow", "Bow", 454,
+                secondaryStatService.findByData("Physical DMG Bonus", 69)));
+        weapons.add(new Weapon("Blackcliff Warbow", "Bow", 565,
+                secondaryStatService.findByData("CRIT DMG", 36.8)));
+        weapons.add(new Weapon("Windblume Ode", "Bow", 510,
+                secondaryStatService.findByData("Elemental Mastery", 165)));
+        weapons.add(new Weapon("Polar Star", "Bow", 608,
+                secondaryStatService.findByData("CRIT Rate", 33.1)));
+        weapons.add(new Weapon("Thundering Pulse", "Bow", 608,
+                secondaryStatService.findByData("CRIT DMG", 66.2)));
+        weapons.add(new Weapon("Elegy for the End", "Bow", 608,
+                secondaryStatService.findByData("Energy Recharge", 55.1)));
+        weapons.add(new Weapon("Skyward Harp", "Bow", 674,
+                secondaryStatService.findByData("CRIT Rate", 22.1)));
+        weapons.add(new Weapon("Amos' Bow", "Bow", 608,
+                secondaryStatService.findByData("ATK", 49.6)));
+        weapons.add(new Weapon("Blackcliff Agate", "Catalyst", 510,
+                secondaryStatService.findByData("CRIT DMG", 55.1)));
+        weapons.add(new Weapon("The Widsith", "Catalyst", 510,
+                secondaryStatService.findByData("CRIT DMG", 55.1)));
+        weapons.add(new Weapon("Solar Pearl", "Catalyst", 510,
+                secondaryStatService.findByData("CRIT Rate", 27.6)));
+        weapons.add(new Weapon("Sacrificial Fragments", "Catalyst", 454,
+                secondaryStatService.findByData("Elemental Mastery", 221)));
+        weapons.add(new Weapon("Royal Grimoire", "Catalyst", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Prototype Amber", "Catalyst", 510,
+                secondaryStatService.findByData("HP", 41.3)));
+        weapons.add(new Weapon("Oathsworn Eye", "Catalyst", 565,
+                secondaryStatService.findByData("ATK", 27.6)));
+        weapons.add(new Weapon("Wine and Song", "Catalyst", 565,
+                secondaryStatService.findByData("Elemental Mastery", 110)));
+        weapons.add(new Weapon("Hakushin Ring", "Catalyst", 565,
+                secondaryStatService.findByData("Energy Recharge", 30.6)));
+        weapons.add(new Weapon("Frostbearer", "Catalyst", 510,
+                secondaryStatService.findByData("ATK", 41.3)));
+        weapons.add(new Weapon("Favonius Codex", "Catalyst", 510,
+                secondaryStatService.findByData("Energy Recharge", 45.9)));
+        weapons.add(new Weapon("Eye of Perception", "Catalyst", 454,
+                secondaryStatService.findByData("ATK", 55.1)));
+        weapons.add(new Weapon("Dodoco Tales", "Catalyst", 454,
+                secondaryStatService.findByData("ATK", 55.1)));
+        weapons.add(new Weapon("Memory of Dust", "Catalyst", 608,
+                secondaryStatService.findByData("ATK", 49.6)));
+        weapons.add(new Weapon("Everlasting Moonglow", "Catalyst", 608,
+                secondaryStatService.findByData("HP", 49.6)));
+        weapons.add(new Weapon("Skyward Atlas", "Catalyst", 674,
+                secondaryStatService.findByData("ATK", 33.1)));
+        weapons.add(new Weapon("Kagura's Verity", "Catalyst", 608,
+                secondaryStatService.findByData("CRIT DMG", 66.2)));
+        weapons.add(new Weapon("Lost Prayer to the Sacred Winds", "Catalyst", 608,
+                secondaryStatService.findByData("CRIT Rate", 33.1)));
     }
 
     /**
@@ -287,6 +482,6 @@ public class AppCommandLineRunner implements CommandLineRunner {
         stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 41.3));
         stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 51.7));
         stats.add(new WeaponSecondaryStat("Physical DMG Bonus", 69));
-
+        secondaryStatService.saveAllStats(stats);
     }
 }

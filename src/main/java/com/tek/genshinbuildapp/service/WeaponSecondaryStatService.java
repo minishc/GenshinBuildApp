@@ -25,4 +25,8 @@ public class WeaponSecondaryStatService {
     public void saveAllStats(List<WeaponSecondaryStat> stats) {
         secondaryStatRepository.saveAll(stats);
     }
+
+    public WeaponSecondaryStat findByData(String statName, double statValue) {
+        return secondaryStatRepository.findByStatNameAndStatValue(statName, statValue);
+    }
 }
