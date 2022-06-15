@@ -23,6 +23,7 @@ public class Weapon {
     int baseAttack;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity = WeaponSecondaryStat.class)
+    @JoinColumn
     WeaponSecondaryStat secondaryStat;
 }

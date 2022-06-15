@@ -7,6 +7,8 @@ import com.tek.genshinbuildapp.model.WeaponSecondaryStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WeaponService {
 
@@ -24,5 +26,9 @@ public class WeaponService {
         WeaponSecondaryStat secondaryStat = secondaryStatRepository.save(secondary);
         weapon.setSecondaryStat(secondaryStat);
         weaponRepository.save(weapon);
+    }
+
+    public void saveAll(List<Weapon> weapons) {
+        weaponRepository.saveAll(weapons);
     }
 }
