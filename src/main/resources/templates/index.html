@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Genshin Build App</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/character-list"></script>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <a>Characters</a>
+        <a>Weapons</a>
+        <a>Builds</a>
+        <a href="./views/register.html">Login/Register</a> <!--This will need to change when the user is logged in-->
+    </div>
+
+    <div id="landing-main-content">
+        <h1>Genshin Build App</h1>
+        <p>
+            This app is for making builds for your Genshin Impact characters. You have the option of making
+            anonymous builds but currently those builds will not be saved when you leave the page. If you create
+            an account you can save your builds and add the characters, weapons, and artifacts that you own.
+        </p>
+
+        <div id="start-a-build">
+            <h2>Start a Build</h2>
+            <div id="character-container">
+                <div th:each=" : ${character}">
+                    <a th:href="@{/build/${character.name}}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,10 +3,9 @@ package com.tek.genshinbuildapp.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +19,9 @@ public class ArtifactSubstat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String statName;
-    String statValue;
+    double statValue;
+
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "substats")
+    List<Artifact> artifacts = new ArrayList<>();
 }

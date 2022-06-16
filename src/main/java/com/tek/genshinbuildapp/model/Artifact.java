@@ -22,8 +22,10 @@ public class Artifact {
     @ManyToOne(targetEntity = ArtifactMainstat.class)
     ArtifactMainstat mainstat;
 
-    @ManyToMany(targetEntity = ArtifactSubstat.class)
-    List<ArtifactSubstat> substats;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "id", name = "artifact_id"),
+                    inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "substat_id"), name = "artifact_substats")
+    List<ArtifactSubstat> substats = new java.util.ArrayList<>();
 
     @Override
     public String toString() {

@@ -3,10 +3,7 @@ package com.tek.genshinbuildapp.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,11 +15,16 @@ import javax.persistence.Id;
 public class Character {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    @Column(nullable = false)
     String name;
+    @Column(nullable = false)
     String weaponType;
     String iconImage;
+    @Column(nullable = false)
     int baseAttack;
+    @Column(nullable = false)
     int baseDefense;
+    @Column(nullable = false)
     int baseHP;
     double baseAttackPercent;
     double baseDefensePercent;
@@ -58,5 +60,25 @@ public class Character {
 
             default: throw new IllegalArgumentException("Provided scaleStat was invalid - check spelling");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Character character = (Character) o;
+
+        if (getId() != character.getId()) return false;
+        if (!getName().equals(character.getName())) return false;
+        return getWeaponType().equals(character.getWeaponType());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getWeaponType().hashCode();
+        return result;
     }
 }
