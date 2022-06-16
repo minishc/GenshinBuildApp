@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Genshin Build App</title>
     <link rel="stylesheet" href="./css/style.css">
@@ -11,7 +11,8 @@
         <a>Characters</a>
         <a>Weapons</a>
         <a>Builds</a>
-        <a href="./views/register.html">Login/Register</a> <!--This will need to change when the user is logged in-->
+        <span sec:authorize="isAnonymous()"><a th:action="@{/register}">Login/Register</a></span>
+        <span sec:authorize="isAuthenticated()"><a th:action="@{/logout}">Logout</a></span>
     </div>
 
     <div id="landing-main-content">
