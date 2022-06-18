@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+    <head>
+        <div th:replace="fragments/head :: head" />
+    </head>
+
+    <body>
+        <div class="main-content">
+            <h1>Weapons</h1>
+            <p>This is a list of weapons currently in the game, hover over the weapon for more information</p>
+            <div class="weapon-container">
+                <div class="card-container" th:each="weapon : ${weapons}"></div>
+            </div>
+        </div>
+    </body>
+</html>

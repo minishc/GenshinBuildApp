@@ -23,6 +23,8 @@ public class Weapon {
     String weaponType;
     @NonNull
     int baseAttack;
+    @NonNull
+    String weaponImage;
 
     @NonNull
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, targetEntity = WeaponSecondaryStat.class)

@@ -93,3 +93,15 @@ body {
 .card-container p {
     color: #FFFFFF;
 }
+
+.weapon-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.weapon-thumb {
+    width: 50px;
+    margin-top: 5px;
+}

@@ -31,4 +31,8 @@ public class WeaponService {
     public void saveAll(List<Weapon> weapons) {
         weaponRepository.saveAll(weapons);
     }
+
+    public List<Weapon> retrieveWeapons() {
+        return weaponRepository.findAll();
+    }
 }
