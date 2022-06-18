@@ -11,6 +11,7 @@ var artifactFormDom = {
 function init() {
     artifactFormDom.collectDom();
     artifactFormDom.artifactSlot.addEventListener("change", updateOptions);
+    updateOptions();
 }
 
 function updateOptions() {
@@ -47,8 +48,32 @@ function updateOptions() {
                     nodes[element].disabled = true;
                 }
             }
-        } 
-        case "goblet":
-        case "circlet":
+        } break;
+        case "goblet": { 
+            for (element in nodes) {
+                if(nodes[element].value == "atk-percent" ||
+                        nodes[element].value == "def-percent" || nodes[element].value == "hp-percent" ||
+                        nodes[element].value == "em" || nodes[element].value == "elemental-dmg-bonus" || 
+                        nodes[element].value == "phys-dmg") {
+                    nodes[element].disabled = false;
+                }
+                else {
+                    nodes[element].disabled = true;
+                }
+            }
+        } break;
+        case "circlet": {
+            for (element in nodes) {
+                if(nodes[element].value == "atk-percent" || 
+                        nodes[element].value == "def-percent" || nodes[element].value == "hp-percent" ||
+                        nodes[element].value == "crit" || nodes[element].value == "crit-dmg" ||
+                        nodes[element].value == "em" || nodes[element].value == "heal-bonus") {
+                    nodes[element].disabled = false;
+                }
+                else {
+                    nodes[element].disabled = true;
+                }
+            }
+        } break;
     }
 }
