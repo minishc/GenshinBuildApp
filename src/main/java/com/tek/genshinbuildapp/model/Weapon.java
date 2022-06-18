@@ -2,9 +2,11 @@ package com.tek.genshinbuildapp.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -34,4 +36,19 @@ public class Weapon {
     @OneToMany(mappedBy = "weapon", orphanRemoval = true)
     private Set<Build> builds = new LinkedHashSet<>();
 
+    @ManyToMany(mappedBy = "weapons")
+    private Set<User> users = new LinkedHashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Weapon weapon = (Weapon) o;
+        return Objects.equals(id, weapon.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

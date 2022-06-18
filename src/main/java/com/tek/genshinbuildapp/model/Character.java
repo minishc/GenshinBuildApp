@@ -41,6 +41,9 @@ public class Character {
     double baseEnergyRecharge;
     double baseHealingPercent;
 
+    @ManyToMany(mappedBy = "characters", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    private Set<User> users = new LinkedHashSet<>();
+
     public Character(String name, String weaponType, int baseAttack, int baseDefense,
                      int baseHP, String scaleStat, double maxValue) {
         this.name = name;

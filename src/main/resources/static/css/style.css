@@ -61,7 +61,6 @@ body {
 
 #start-a-build {
     height: auto;
-    border: 3px solid #262b50;
     margin: 8px;
     text-align: center;
 }
@@ -76,6 +75,7 @@ body {
     justify-content: center;
     flex-flow: row wrap;
     text-align: center;
+    border: 3px solid #262b50;
 }
 
 .character-thumb {
@@ -88,10 +88,12 @@ body {
     height: 120px;
     border-radius: 10px;
     background-color:#262b50;
+    margin: 5px;
 }
 
 .card-container p {
     color: #FFFFFF;
+    font-size: 12px;
 }
 
 .weapon-container {
@@ -99,6 +101,8 @@ body {
     justify-content: center;
     flex-flow: row wrap;
     text-align: center;
+    border: 3px solid #262b50;
+    margin: 5px;
 }
 
 .weapon-thumb {

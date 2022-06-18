@@ -16,7 +16,7 @@ import java.util.Set;
 public class Artifact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    long id;
     String artifactSet;
     String slot;
 
@@ -34,6 +34,10 @@ public class Artifact {
 
     @ManyToMany(mappedBy = "artifacts")
     private Set<Build> builds = new LinkedHashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Override
     public String toString() {
@@ -63,10 +67,10 @@ public class Artifact {
 
     @Override
     public int hashCode() {
-        int result = (getId() ^ (getId() >>> 31));
+        long result = (getId() ^ (getId() >>> 31));
         result = 31 * result + getArtifactSet().hashCode();
         result = 31 * result + getSlot().hashCode();
         result = 31 * result + getMainstat().hashCode();
-        return result;
+        return (int)result;
     }
 }

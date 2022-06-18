@@ -5,11 +5,15 @@
     </head>
 
     <body>
+        <div th:replace="fragments/nav-bar :: nav-bar"/>
         <div class="main-content">
             <h1>Weapons</h1>
             <p>This is a list of weapons currently in the game, hover over the weapon for more information</p>
             <div class="weapon-container">
-                <div class="card-container" th:each="weapon : ${weapons}"></div>
+                <div class="card-container" th:each="weapon : ${weapons}">
+                    <img th:src="${weapon.weaponImage}" alt="${weapon.name}" class="weapon-thumb">
+                    <p th:text="${weapon.name}"></p>
+                </div>
             </div>
         </div>
     </body>
