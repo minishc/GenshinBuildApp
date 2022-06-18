@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+    <head>
+        <div th:replace="fragments/head :: head" />
+    </head>
+
+    <body>
+        <div th:replace="fragments/nav-bar :: nav-bar" />
+
+        <div class="main-content">
+            <h1>Characters</h1>
+            <p>Click on a character for a more detailed look at their stats</p>
+            <div class="character-container">
+                <a th:href="@{/character(${character.name})}" th:each="character : ${characters}" style="margin: 6px;">
+                    <div class="card-container">
+                        <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
+                        <p th:text="${character.name}"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

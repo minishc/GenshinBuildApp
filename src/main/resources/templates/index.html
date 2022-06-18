@@ -2,20 +2,12 @@
 <html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Genshin Build App</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="text/javascript" src="./js/character-list"></script>
+    <div th:replace="/fragments/head :: head" />
 </head>
 
 <body>
-    <div class="nav-bar">
-        <a>Characters</a>
-        <a>Weapons</a>
-        <a>Builds</a>
-        <span sec:authorize="isAnonymous()"><a th:action="@{/register}">Login/Register</a></span>
-        <span sec:authorize="isAuthenticated()"><a th:action="@{/logout}">Logout</a></span>
-    </div>
-
-    <div id="landing-main-content">
+    <div th:replace="/fragments/nav-bar :: nav-bar" />
+    <div class="main-content">
         <h1>Genshin Build App</h1>
         <p>
             This app is for making builds for your Genshin Impact characters. You have the option of making
@@ -25,10 +17,13 @@
 
         <div id="start-a-build">
             <h2>Start a Build</h2>
-            <div id="character-container">
-                <div th:each=" : ${character}">
-                    <a th:href="@{/build/${character.name}}"></a>
-                </div>
+            <div class="character-container">
+                <a th:href="@{/build(${character.name})}" th:each="character : ${characters}" style="margin: 6px;">
+                    <div class="card-container">
+                        <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
+                        <p th:text="${character.name}"></p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

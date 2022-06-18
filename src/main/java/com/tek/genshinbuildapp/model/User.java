@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,9 +16,13 @@ import javax.persistence.*;
 @Entity
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    int id;
     @Column(unique = true, length = 20)
     String username;
     @Column(length = 32)
     String password;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<Build> builds = new LinkedHashSet<>();
+
 }

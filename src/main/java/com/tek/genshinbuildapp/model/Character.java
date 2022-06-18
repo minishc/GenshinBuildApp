@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,14 +14,16 @@ import javax.persistence.*;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Table(name = "genshin_character")
 public class Character {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
     @Column(nullable = false)
     String name;
     @Column(nullable = false)
     String weaponType;
     String iconImage;
+    String characterDemoUrl;
     @Column(nullable = false)
     int baseAttack;
     @Column(nullable = false)
@@ -36,7 +40,7 @@ public class Character {
     double baseElemDamage;
     double baseEnergyRecharge;
     double baseHealingPercent;
-    
+
     public Character(String name, String weaponType, int baseAttack, int baseDefense,
                      int baseHP, String scaleStat, double maxValue) {
         this.name = name;

@@ -11,24 +11,25 @@ body {
     margin: 0;
 }
 
-#landing-main-content {
-    margin-top: 80px;
+.main-content {
+    margin-top: 40px;
     padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #202442;
     display: block;
-    height: 100%;
-    min-height: 1080px;
+    height: auto;
     margin-left: 25%;
     width: 50%;
 }
 
-#landing-main-content > h1 {
-    margin-top: 80px;
+.main-content > h1 {
+    margin-top: 40px;
     text-align: center;
     height: 50px;
 }
 
-#landing-main-content > p {
+.main-content > p {
+    text-align: center;
     margin-left: 8px;
     margin-top: 40px;
     width: 100%;
@@ -59,8 +60,7 @@ body {
 }
 
 #start-a-build {
-    height: 50%;
-    min-height: 800px;
+    height: auto;
     border: 3px solid #262b50;
     margin: 8px;
     text-align: center;
@@ -71,6 +71,25 @@ body {
     margin: 0;
 }
 
-#character-container {
+.character-container {
     display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.character-thumb {
+    width: 50px;
+    margin-top: 5px;
+}
+
+.card-container {
+    width: 100px;
+    height: 120px;
+    border-radius: 10px;
+    background-color:#262b50;
+}
+
+.card-container p {
+    color: #FFFFFF;
 }

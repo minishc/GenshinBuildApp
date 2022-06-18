@@ -17,7 +17,7 @@ import java.util.List;
 public class ArtifactSubstat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
     String statName;
     double statValue;
 

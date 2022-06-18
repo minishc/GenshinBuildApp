@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 public class WeaponSecondaryStat {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
     @NonNull
     String statName;
     @NonNull

@@ -6,6 +6,7 @@ import com.tek.genshinbuildapp.model.WeaponSecondaryStat;
 import com.tek.genshinbuildapp.service.CharacterService;
 import com.tek.genshinbuildapp.service.WeaponSecondaryStatService;
 import com.tek.genshinbuildapp.service.WeaponService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class AppCommandLineRunner implements CommandLineRunner {
 
     private final CharacterService characterService;
@@ -269,7 +271,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
     private void populateWeapons() {
         List<Weapon> weapons = new ArrayList<>();
         weapons.add(new Weapon("Blackcliff Longsword", SWORD, 565,
-                                secondaryStatService.findByData(CRIT_DMG, 36.8)));
+                secondaryStatService.findByData(CRIT_DMG, 36.8)));
         weapons.add(new Weapon("Favonius Sword", SWORD, 454,
                 secondaryStatService.findByData(ENERGY_RECHARGE, 61.3)));
         weapons.add(new Weapon("Iron Sting", SWORD, 510,

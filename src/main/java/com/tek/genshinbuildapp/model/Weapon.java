@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -23,7 +25,11 @@ public class Weapon {
     int baseAttack;
 
     @NonNull
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = WeaponSecondaryStat.class)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, targetEntity = WeaponSecondaryStat.class)
     @JoinColumn
     WeaponSecondaryStat secondaryStat;
+
+    @OneToMany(mappedBy = "weapon", orphanRemoval = true)
+    private Set<Build> builds = new LinkedHashSet<>();
+
 }

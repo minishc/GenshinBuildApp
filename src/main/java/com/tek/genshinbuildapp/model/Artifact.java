@@ -4,7 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,22 +16,29 @@ import java.util.List;
 public class Artifact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String set;
+    int id;
+    String artifactSet;
     String slot;
 
-    @ManyToOne(targetEntity = ArtifactMainstat.class)
-    ArtifactMainstat mainstat;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "id", name = "artifact_id"),
-                    inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "substat_id"), name = "artifact_substats")
-    List<ArtifactSubstat> substats = new java.util.ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mainstat_id")
+    private ArtifactMainstat mainstat;
+
+    @ManyToMany
+    @JoinTable(name = "artifact_substats",
+            joinColumns = @JoinColumn(name = "artifact_id"),
+            inverseJoinColumns = @JoinColumn(name = "substat_id"))
+    private Set<ArtifactSubstat> substats = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy = "artifacts")
+    private Set<Build> builds = new LinkedHashSet<>();
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        String addToBuilder = set + ", " + slot + ", " +
+        String addToBuilder = artifactSet + ", " + slot + ", " +
                 mainstat.getStatName() + " " + mainstat.getStatValue();
         stringBuilder.append(addToBuilder);
         for(ArtifactSubstat artifactSubstat : substats) {
@@ -38,5 +46,27 @@ public class Artifact {
             stringBuilder.append(addToBuilder);
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Artifact artifact = (Artifact) o;
+
+        if (getId() != artifact.getId()) return false;
+        if (!getArtifactSet().equals(artifact.getArtifactSet())) return false;
+        if (!getSlot().equals(artifact.getSlot())) return false;
+        return getMainstat().equals(artifact.getMainstat());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (getId() ^ (getId() >>> 31));
+        result = 31 * result + getArtifactSet().hashCode();
+        result = 31 * result + getSlot().hashCode();
+        result = 31 * result + getMainstat().hashCode();
+        return result;
     }
 }
