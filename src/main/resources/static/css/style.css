@@ -1,6 +1,6 @@
 @font-face {
     font-family: genshinFont;
-    src: url("../zh-cn.ttf");
+    src: url("/zh-cn.ttf");
 }
 
 body {

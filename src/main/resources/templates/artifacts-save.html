@@ -2,12 +2,42 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
     <head>
         <div th:replace="fragments/head :: head"/>
+        <script th:src="@{/js/artifacts-save.js}"></script>
     </head>
 
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
         <div class="main-container">
-            
+            <form th:action="@{artifacts/save}" method="post">
+                <input type="text" name="set" id="artifact-set" th:field="*{artifact.artifactSet}">
+                <select name="slot" id="artifact-slot" th:field="*{artifact.slot}">
+                    <option value="flower">Flower</option>
+                    <option value="plume">Plume</option>
+                    <option value="sands">Sands</option>
+                    <option value="goblet">Goblet</option>
+                    <option value="circlet">Circlet</option>
+                </select>
+                <select name="mainstat-name" id="mainstat-name">
+                    <option value="hp" th:field="*{artifactMainstat.statName}">HP</option>
+                    <option value="atk" th:field="*{artifactMainstat.statName}">ATK</option>
+                    <option value="hp-percent" th:field="*{artifactMainstat.statName}">HP%</option>
+                    <option value="atk-percent" th:field="*{artifactMainstat.statName}">ATK%</option>
+                    <option value="def-percent" th:field="*{artifactMainstat.statName}">DEF%</option>
+                    <option value="er" th:field="*{artifactMainstat.statName}">Energy Recharge</option>
+                    <option value="em" th:field="*{artifactMainstat.statName}">Elemental Mastery</option>
+                    <option value="pyro" th:field="*{artifactMainstat.statName}">Pyro Elemental DMG Bonus</option>
+                    <option value="hydro" th:field="*{artifactMainstat.statName}">Hydro Elemental DMG Bonus</option>
+                    <option value="anemo" th:field="*{artifactMainstat.statName}">Anemo Elemental DMG Bonus</option>
+                    <option value="electro" th:field="*{artifactMainstat.statName}">Electro Elemental DMG Bonus</option>
+                    <option value="geo" th:field="*{artifactMainstat.statName}">Geo Elemental DMG Bonus</option>
+                    <option value="cryo" th:field="*{artifactMainstat.statName}">Cryo Elemental DMG Bonus</option>
+                    <option value="crit" th:field="*{artifactMainstat.statName}">Crit%</option>
+                    <option value="crit-dmg" th:field="*{artifactMainstat.statName}">Crit DMG%</option>
+                    <option value="heal-bonus" th:field="*{artifactMainstat.statName}">Healing Bonus</option>
+                    <option value="phys-dmg" th:field="*{artifactMainstat.statName}">Physical DMG Bonus</option>
+                </select>
+                <input type="number" name="mainstat-value" id="mainstat-value" th:field="*{artifactMainstat.statValue}">
+            </form>
         </div>
     </body>
 </html>

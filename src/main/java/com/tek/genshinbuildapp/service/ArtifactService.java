@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ArtifactService {
@@ -36,5 +37,14 @@ public class ArtifactService {
 
     public List<Artifact> retrieveArtifacts(User user) {
         return artifactRepository.findAllByUserId(user.getId());
+    }
+
+    public void saveArtifact(long id, Artifact artifact, ArtifactMainstat mainstat, Set<ArtifactSubstat> substats) {
+        substatRepository.saveAll(substats);
+        mainstatRepository.save(mainstat);
+        artifact.setMainstat(mainstat);
+        artifact.setSubstats(substats);
+        artifact.setUser(userService.retrieveUser(id));
+        artifactRepository.save(artifact);
     }
 }
