@@ -8,30 +8,88 @@
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
         <div class="main-container">
-            <form th:action="@{artifacts/save}" method="post">
-                <input type="text" name="set" id="artifact-set" th:field="*{artifact.artifactSet}">
-                <select name="slot" id="artifact-slot" th:field="*{artifact.slot}">
+            <form th:action="@{/artifacts/save}" method="post">
+                <input type="text" name="set" id="artifact-set" th:field="*{artifactdto.set}">
+                <select name="slot" id="artifact-slot" th:field="*{artifactdto.slot}">
                     <option value="flower" selected>Flower</option>
                     <option value="plume">Plume</option>
                     <option value="sands">Sands</option>
                     <option value="goblet">Goblet</option>
                     <option value="circlet">Circlet</option>
                 </select>
-                <select name="mainstat-name" id="mainstat-name">
-                    <option value="hp" th:field="*{artifactMainstat.statName}" selected>HP</option>
-                    <option value="atk" th:field="*{artifactMainstat.statName}">ATK</option>
-                    <option value="hp-percent" th:field="*{artifactMainstat.statName}">HP%</option>
-                    <option value="atk-percent" th:field="*{artifactMainstat.statName}">ATK%</option>
-                    <option value="def-percent" th:field="*{artifactMainstat.statName}">DEF%</option>
-                    <option value="er" th:field="*{artifactMainstat.statName}">Energy Recharge</option>
-                    <option value="em" th:field="*{artifactMainstat.statName}">Elemental Mastery</option>
-                    <option value="elemental-dmg-bonus" th:field="*{artifactMainstat.statName}">Elemental DMG Bonus</option>
-                    <option value="crit" th:field="*{artifactMainstat.statName}">Crit%</option>
-                    <option value="crit-dmg" th:field="*{artifactMainstat.statName}">Crit DMG%</option>
-                    <option value="heal-bonus" th:field="*{artifactMainstat.statName}">Healing Bonus</option>
-                    <option value="phys-dmg" th:field="*{artifactMainstat.statName}">Physical DMG Bonus</option>
+                <select name="mainstat-name" id="mainstat-name" th:field="*{artifactdto.statNames}">
+                    <option value="hp" selected>HP</option>
+                    <option value="atk">ATK</option>
+                    <option value="hp-percent">HP%</option>
+                    <option value="atk-percent">ATK%</option>
+                    <option value="def-percent">DEF%</option>
+                    <option value="er">Energy Recharge</option>
+                    <option value="em">Elemental Mastery</option>
+                    <option value="elemental-dmg-bonus">Elemental DMG Bonus</option>
+                    <option value="crit">Crit%</option>
+                    <option value="crit-dmg">Crit DMG%</option>
+                    <option value="heal-bonus">Healing Bonus</option>
+                    <option value="phys-dmg">Physical DMG Bonus</option>
                 </select>
-                <input type="number" name="mainstat-value" id="mainstat-value" th:field="*{artifactMainstat.statValue}">
+                <input type="number" name="mainstat-value" id="mainstat-value" th:field="*{artifactdto.statValues}">
+                <div class="flex-break"></div>
+                <select name="substat-name1" id="substat-name1" th:field="*{artifactdto.statNames}">
+                    <option value="hp">HP</option>
+                    <option value="atk">ATK</option>
+                    <option value="def">DEF</option>
+                    <option value="hp-percent">HP%</option>
+                    <option value="atk-percent">ATK%</option>
+                    <option value="def-percent">DEF%</option>
+                    <option value="crit">Crit</option>
+                    <option value="crit-dmg">Crit DMG</option>
+                    <option value="er">Energy Recharge</option>
+                    <option value="em">Elemental Mastery</option>
+                </select>
+                <input type="number" name="" id="" th:field="*{artifactdto.statValues}" step=".01">
+                <div class="flex-break"></div>
+                <select name="substat-name2" id="substat-name2" th:field="*{artifactdto.statNames}">
+                    <option value="hp">HP</option>
+                    <option value="atk">ATK</option>
+                    <option value="def">DEF</option>
+                    <option value="hp-percent">HP%</option>
+                    <option value="atk-percent">ATK%</option>
+                    <option value="def-percent">DEF%</option>
+                    <option value="crit">Crit</option>
+                    <option value="crit-dmg">Crit DMG</option>
+                    <option value="er">Energy Recharge</option>
+                    <option value="em">Elemental Mastery</option>
+                </select>
+                <input type="number" name="" id="" th:field="*{artifactdto.statValues}" step=".01">
+                <div class="flex-break"></div>
+                <select name="substat-name3" id="substat-name3" th:field="*{artifactdto.statNames}">
+                    <option value="hp">HP</option>
+                    <option value="atk">ATK</option>
+                    <option value="def">DEF</option>
+                    <option value="hp-percent">HP%</option>
+                    <option value="atk-percent">ATK%</option>
+                    <option value="def-percent">DEF%</option>
+                    <option value="crit">Crit</option>
+                    <option value="crit-dmg">Crit DMG</option>
+                    <option value="er">Energy Recharge</option>
+                    <option value="em">Elemental Mastery</option>
+                </select>
+                <input type="number" name="" id="" th:field="*{artifactdto.statValues}" step=".01">
+                <div class="flex-break"></div>
+                <select name="substat-name4" id="substat-name4" th:field="*{artifactdto.statNames}">
+                    <option value="hp">HP</option>
+                    <option value="atk">ATK</option>
+                    <option value="def">DEF</option>
+                    <option value="hp-percent">HP%</option>
+                    <option value="atk-percent">ATK%</option>
+                    <option value="def-percent">DEF%</option>
+                    <option value="crit">Crit</option>
+                    <option value="crit-dmg">Crit DMG</option>
+                    <option value="er">Energy Recharge</option>
+                    <option value="em">Elemental Mastery</option>
+                </select>
+                <input type="number" name="" id="" th:field="*{artifactdto.statValues}" step=".01">
+                <div class="flex-break"></div>
+                <button type="submit" th>Save Artifact</button>
             </form>
         </div>
     </body>

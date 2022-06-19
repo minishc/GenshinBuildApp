@@ -3,11 +3,13 @@ package com.tek.genshinbuildapp.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -18,6 +20,8 @@ public class ArtifactMainstat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @NonNull
     String statName;
-    String statValue;
+    @NonNull
+    double statValue;
 }

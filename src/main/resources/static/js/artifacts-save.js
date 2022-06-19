@@ -11,6 +11,7 @@ var artifactFormDom = {
 function init() {
     artifactFormDom.collectDom();
     artifactFormDom.artifactSlot.addEventListener("change", updateOptions);
+    artifactFormDom.mainstatName.addEventListener("change", updateValue);
     updateOptions();
 }
 
@@ -74,6 +75,47 @@ function updateOptions() {
                     nodes[element].disabled = true;
                 }
             }
+        } break;
+    }
+}
+
+function updateValue() {
+    switch(artifactFormDom.mainstatName.value) {
+        case "hp": {
+            artifactFormDom.mainstatValue.value = 4780;
+        } break;
+        case "atk": {
+            artifactFormDom.mainstatValue.value = 311;
+        } break;
+        case "hp-percent": {
+            artifactFormDom.mainstatValue.value = 46.6;
+        } break;
+        case "atk-percent": {
+            artifactFormDom.mainstatValue.value = 46.6;
+        }
+        case "elemental-dmg": {
+            artifactFormDom.mainstatValue.value = 46.6;
+        } break;
+        case "def-percent": {
+            artifactFormDom.mainstatValue.value = 58.3;
+        } break;
+        case "phys-dmg": {
+            artifactFormDom.mainstatValue.value = 58.3;
+        } break;
+        case "er": {
+            artifactFormDom.mainstatValue.value = 51.8;
+        } break;
+        case "em": {
+            artifactFormDom.mainstatValue.value = 186.5;
+        } break;
+        case "crit": {
+            artifactFormDom.mainstatValue.value = 31.1;
+        } break;
+        case "crit-dmg": {
+            artifactFormDom.mainstatValue.value = 62.2;
+        } break;
+        case "heal-bonus": {
+            artifactFormDom.mainstatValue.value = 35.9;
         } break;
     }
 }

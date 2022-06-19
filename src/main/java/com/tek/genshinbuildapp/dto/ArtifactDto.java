@@ -9,15 +9,13 @@ import java.util.HashMap;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ArtifactDto {
 
-    int artifactId;
     long userId;
     String set;
     String slot;
-    String mainstatName;
-    double mainstatValue;
-    String[] substatNames;
-    double[] substatValues;
+    String[] statNames;
+    double[] statValues;
 }

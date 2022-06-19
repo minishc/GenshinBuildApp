@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -17,7 +18,9 @@ public class Artifact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    @NonNull
     String artifactSet;
+    @NonNull
     String slot;
 
 

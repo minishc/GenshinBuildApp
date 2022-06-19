@@ -27,4 +27,8 @@ public class UserService {
             throw new EntityNotFoundException("No user with id: " + id);
         }
     }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }

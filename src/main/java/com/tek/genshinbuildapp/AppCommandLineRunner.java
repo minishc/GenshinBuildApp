@@ -1,9 +1,11 @@
 package com.tek.genshinbuildapp;
 
 import com.tek.genshinbuildapp.model.Character;
+import com.tek.genshinbuildapp.model.User;
 import com.tek.genshinbuildapp.model.Weapon;
 import com.tek.genshinbuildapp.model.WeaponSecondaryStat;
 import com.tek.genshinbuildapp.service.CharacterService;
+import com.tek.genshinbuildapp.service.UserService;
 import com.tek.genshinbuildapp.service.WeaponSecondaryStatService;
 import com.tek.genshinbuildapp.service.WeaponService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +23,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
     private final CharacterService characterService;
     private final WeaponSecondaryStatService secondaryStatService;
     private final WeaponService weaponService;
-
+    private final UserService userService;
 
     private static final String SWORD = "Sword";
     private static final String BOW = "Bow";
@@ -49,10 +51,12 @@ public class AppCommandLineRunner implements CommandLineRunner {
     @Autowired
     public AppCommandLineRunner(CharacterService characterService,
                                 WeaponSecondaryStatService secondaryStatService,
-                                WeaponService weaponService) {
+                                WeaponService weaponService,
+                                UserService userService) {
         this.characterService = characterService;
         this.weaponService = weaponService;
         this.secondaryStatService = secondaryStatService;
+        this.userService = userService;
     }
 
     @Override
@@ -60,6 +64,8 @@ public class AppCommandLineRunner implements CommandLineRunner {
         populateCharacters();
         populateSecondaryStats();
         populateWeapons();
+        User user = new User(1, "Chris", "password");
+        userService.saveUser(user);
     }
 
     /**

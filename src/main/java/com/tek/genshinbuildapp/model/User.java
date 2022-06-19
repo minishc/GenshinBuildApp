@@ -8,36 +8,45 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Table(name = "users")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    @NonNull
     @Column(unique = true, length = 20)
     String username;
+    @NonNull
     @Column(length = 32)
     String password;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Build> builds = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Artifact> artifacts = new LinkedHashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany
     @JoinTable(name = "user_weapons",
-            joinColumns = @JoinColumn(name = "user_null"),
-            inverseJoinColumns = @JoinColumn(name = "weapons_id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "weapons_id", referencedColumnName = "id"))
     private Set<Weapon> weapons = new LinkedHashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany
     @JoinTable(name = "user_characters",
-            joinColumns = @JoinColumn(name = "user_null"),
-            inverseJoinColumns = @JoinColumn(name = "characters_id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"))
     private Set<Character> characters = new LinkedHashSet<>();
+
+    public User(long id, @NonNull String username, @NonNull String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public String toString() {

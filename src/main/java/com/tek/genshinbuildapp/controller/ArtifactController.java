@@ -1,9 +1,11 @@
 package com.tek.genshinbuildapp.controller;
 
+import com.tek.genshinbuildapp.dto.ArtifactDto;
 import com.tek.genshinbuildapp.model.Artifact;
 import com.tek.genshinbuildapp.model.ArtifactMainstat;
 import com.tek.genshinbuildapp.model.ArtifactSubstat;
 import com.tek.genshinbuildapp.service.ArtifactService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Controller
+@Slf4j
 public class ArtifactController {
 
     private ArtifactService artifactService;
@@ -32,29 +35,20 @@ public class ArtifactController {
 
     @GetMapping("/artifacts/save")
     public String showForm(Model model) {
-        model.addAttribute("artifact", new Artifact());
-        model.addAttribute("artifactMainstat", new ArtifactMainstat());
-        model.addAttribute("artifactSubstat1", new ArtifactSubstat());
-        model.addAttribute("artifactSubstat2", new ArtifactSubstat());
-        model.addAttribute("artifactSubstat3", new ArtifactSubstat());
-        model.addAttribute("artifactSubstat4", new ArtifactSubstat());
+        model.addAttribute("artifactdto", new ArtifactDto());
         return "artifacts-save";
     }
 
-    @PostMapping("/artifacts/save?{id}")
-    public String saveArtifact( @ModelAttribute("artifact") Artifact artifact,
-                                @ModelAttribute("artifactMainstat") ArtifactMainstat artifactMainstat,
-                                @ModelAttribute("artifactSubstat1") ArtifactSubstat artifactSubstat1,
-                                @ModelAttribute("artifactSubstat2") ArtifactSubstat artifactSubstat2,
-                                @ModelAttribute("artifactSubstat3") ArtifactSubstat artifactSubstat3,
-                                @ModelAttribute("artifactSubstat4") ArtifactSubstat artifactSubstat4,
-                                @PathVariable("id") long id) {
+    @PostMapping("/artifacts/save")
+    public String saveArtifact(@ModelAttribute("artifactdto")ArtifactDto artifactDto) {
         Set<ArtifactSubstat> substats = new LinkedHashSet<>();
-        substats.add(artifactSubstat1);
-        substats.add(artifactSubstat2);
-        substats.add(artifactSubstat3);
-        substats.add(artifactSubstat4);
-        artifactService.saveArtifact(id, artifact, artifactMainstat, substats);
-        return "artifact-save";
+        log.info(artifactDto.toString());
+        Artifact artifact = new Artifact(artifactDto.getSlot(), artifactDto.getSet());
+        ArtifactMainstat mainstat = new ArtifactMainstat(artifactDto.getStatNames()[0], artifactDto.getStatValues()[0]);
+        for(int i = 1; i < 5; i++) {
+            substats.add(new ArtifactSubstat(artifactDto.getStatNames()[i], artifactDto.getStatValues()[i]));
+        }
+        artifactService.saveArtifact(1, artifact, mainstat, substats);
+        return "redirect:/artifacts/save";
     }
 }

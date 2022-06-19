@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -18,7 +19,9 @@ public class ArtifactSubstat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @NonNull
     String statName;
+    @NonNull
     double statValue;
 
     @ToString.Exclude
