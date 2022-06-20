@@ -3,6 +3,14 @@
     src: url("/zh-cn.ttf");
 }
 
+* {
+    font-family: genshinFont;
+}
+
+option {
+    font-family: genshinFont;;
+}
+
 body {
     height: 100vh;
     font-family: genshinFont;
@@ -127,4 +135,19 @@ input::-webkit-inner-spin-button {
 
 input[type=number]{
     -moz-appearance: textfield;
+}
+
+#artifact-form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.stat-selector {
+    width: 200px;
+}
+
+label {
+    width: 100px;
+    text-align: left;
 }
