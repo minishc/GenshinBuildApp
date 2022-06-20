@@ -2,9 +2,9 @@
 
 This web app is for theorycrafting builds for characters in Genshin Impact. You can create an account and save characters, weapons,
 and artifacts to your account. You will be able to combine your characters, weapons, and artifacts to make a build
-and look at the stats for the build with a stat sheet similar to what you would see in game. 
+and look at the stats for the build with a stat sheet similar to what you would see in game.\n
 
-Some user stories used during the development of the web app:
+Some user stories used during the development of the web app:\n
 As a user I want to be able to add characters, weapons, and artifacts that I own to my account
 As an admin I want to be able to view data from the database in browser
 As a user I want to be able to quickly navigate to making a build
