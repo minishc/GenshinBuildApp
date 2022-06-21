@@ -22,7 +22,7 @@ public class Build {
     @JoinColumn(name = "character_id", nullable = false)
     private Character character;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "build_artifacts",
             joinColumns = @JoinColumn(name = "build_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "artifacts_id", referencedColumnName = "id"))

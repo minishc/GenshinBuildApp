@@ -219,7 +219,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
         characters.add(thoma);
 
         Character traveler = new Character("Traveler", SWORD, 212, 683, 10875, BASE_ATTACK_PERCENT, 24);
-        traveler.setIconImage("https://static.wikia.nocookie.net/gensin-impact/images/8/8a/Character_Thoma_Thumb.png");
+        traveler.setIconImage("https://static.wikia.nocookie.net/gensin-impact/images/7/71/Character_Traveler_Thumb.png");
         characters.add(traveler);
 
         Character venti = new Character("Venti", BOW, 263, 669, 10531, BASE_ENERGY_RECHARGE, 32);

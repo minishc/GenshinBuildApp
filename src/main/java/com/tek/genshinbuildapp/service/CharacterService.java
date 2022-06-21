@@ -1,7 +1,7 @@
 package com.tek.genshinbuildapp.service;
 
-import com.tek.genshinbuildapp.model.Character;
 import com.tek.genshinbuildapp.dao.CharacterRepository;
+import com.tek.genshinbuildapp.model.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,18 @@ public class CharacterService {
 
     public List<Character> retrieveCharacters() {
         return characterRepository.findAll();
+    }
+
+    public Character findCharacterByName(String name) {
+        Character character;
+        Optional<Character> result = characterRepository.findCharacterByName(name);
+        if(result.isPresent()) {
+            character = result.get();
+        }
+        else {
+            throw new EntityNotFoundException("No character found with the name: " + name);
+        }
+        return character;
     }
 
     public Character findCharacterById(int id) {

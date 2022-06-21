@@ -10,8 +10,9 @@
         <div class="main-content">
             <h1>Characters</h1>
             <p>Click on a character for a more detailed look at their stats</p>
+            <span th:if="${message ne null}"><p th:th:text="#{message}"></p></span>
             <div class="character-container">
-                <a th:href="@{/character(${character.name})}" th:each="character : ${characters}" style="margin: 6px;">
+                <a th:href="@{'/character/'+${character.name}}" th:each="character : ${characters}" style="margin: 6px;">
                     <div class="card-container">
                         <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
                         <p th:text="${character.name}"></p>

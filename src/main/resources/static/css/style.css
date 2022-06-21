@@ -38,9 +38,9 @@ body {
 
 .main-content > p {
     text-align: center;
-    margin-left: 8px;
+    margin-left: 5%;
     margin-top: 40px;
-    width: 100%;
+    width: 90%;
 }
 
 .nav-bar {
@@ -83,6 +83,7 @@ body {
     justify-content: center;
     flex-flow: row wrap;
     text-align: center;
+    margin: 5px;
     border: 3px solid #262b50;
 }
 
@@ -150,4 +151,56 @@ input[type=number]{
 label {
     width: 100px;
     text-align: left;
+}
+
+#character-stats {
+    margin-bottom: 8px;
+    margin-right: 8px;
+    height: auto;
+    flex-grow: 1;
+    border: 4px #262b50 solid;
+}
+
+.stat-container {
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat-container p {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0px;
+    font-size: 18pt;
+}
+
+.light-background {
+    background-color: #262b50;
+}
+
+.dark-background {
+    background-color: #202442;
+}
+
+#character-sheet-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#build-button {
+    width: 240px;
+    height: 60px;
+    background-color: #202442;
+    color: #FFFFFF;
+    border: 4px #262b50 solid;
+}
+
+#back-to-characters {
+    color: #FFFFFF;
+    width: 240px;
+    height: 60px;
+    border: 4px #262b50 solid;
+    background-color: #202442;
 }

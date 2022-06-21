@@ -6,5 +6,73 @@
 
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
+        <div class="main-content" style="display: flex; flex-flow: row wrap; justify-content: space-around;">
+            <h1 th:text="${character.name}" style="text-align: center; flex-grow: 1;"></h1>
+            <div class="flex-break"></div>
+            <span style="display: inherit; flex-grow: 1; justify-content: center;">
+                <h3 style="margin-right: 16px;">Weapon Type</h3>
+                <h3 th:text="${character.weaponType}"></h3>
+            </span>
+            <div class="flex-break"></div>
+            <img th:src="${character.iconImage}" th:alt="${character.name}" style="width: 256px; height: 256px;">
+            <div id="character-stats">
+                <span class="stat-container dark-background">
+                    <p>Base HP</p>
+                    <p th:text="${character.baseHP}"></p>
+                </span>
+                <span class="stat-container light-background">
+                    <p>Base Attack</p>
+                    <p th:text="${character.baseAttack}"></p>
+                </span>
+                <span class="stat-container dark-background">
+                    <p>Base Defense</p>
+                    <p th:text="${character.baseDefense}"></p>
+                </span>
+                <span class="stat-container light-background">
+                    <p>Base Elemental Mastery</p>
+                    <p th:text="${character.baseElemMastery}"></p>
+                </span>
+                <span class="stat-container dark-background">
+                    <p>Base HP Percent</p>
+                    <p th:text="${character.baseHPPercent} + '%'"></p>
+                </span>
+                <span class="stat-container light-background">
+                    <p>Base Attack Percent</p>
+                    <p th:text="${character.baseAttackPercent} + '%'"></p>
+                </span>
+                <span class="stat-container dark-background">
+                    <p>Base Defense Percent</p>
+                    <p th:text="${character.baseDefensePercent} + '%'"></p>
+                </span>
+                <span class="stat-container light-background">
+                    <p>Base Energy Recharge</p>
+                    <p th:text="${character.baseEnergyRecharge} + '%'"></p>
+                </span>
+                <span class="stat-container dark-background">
+                    <p>Base Crit</p>
+                    <p th:text="${character.baseCrit} + '%'"></p>
+                </span>
+                <span class="stat-container light-background">
+                    <p>Base Crit Damage</p>
+                    <p th:text="${character.baseCritDamage} + '%'"></p>
+                </span>
+                <span class="stat-container dark-background">
+                    <p>Base Physical Damage Bonus</p>
+                    <p th:text="${character.basePhysDamage} + '%'"></p>
+                </span>
+                <span class="stat-container light-background">
+                    <p>Base Elemental Damage Bonus</p>
+                    <p th:text="${character.baseElemDamage} + '%'"></p>
+                </span>
+                <span class="stat-container dark-background">
+                    <p>Base Healing Percentage Bonus</p>
+                    <p th:text="${character.baseHealingPercent} + '%'"></p>
+                </span>
+            </div>
+            <div class="flex-break"></div>
+            <a th:href="@{/characters}"><button id="back-to-characters">Back</button></a>
+            <a th:href="@{'build/' + ${character.name}}"><button id="build-button">Start a build for 
+                <span th:text="${character.name}"></span></button></a>
+        </div>
     </body>
 </html>
