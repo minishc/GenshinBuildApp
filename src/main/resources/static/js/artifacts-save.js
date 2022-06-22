@@ -20,7 +20,7 @@ function updateOptions() {
     switch(artifactFormDom.artifactSlot.value.toLowerCase()) {
         case "flower": {
             for (element in nodes) {
-                if(nodes[element].value == "hp") {
+                if(nodes[element].value == "HP") {
                     nodes[element].disabled = false;
                 }
                 else {
@@ -30,7 +30,7 @@ function updateOptions() {
         } break;
         case "plume": {
             for (element in nodes) {
-                if(nodes[element].value == "atk") {
+                if(nodes[element].value == "ATK") {
                     nodes[element].disabled = false;
                 }
                 else {
@@ -40,9 +40,9 @@ function updateOptions() {
         } break;
         case "sands": {
             for (element in nodes) {
-                if(nodes[element].value == "atk-percent" ||
-                        nodes[element].value == "er" || nodes[element].value == "em" || 
-                        nodes[element].value == "def-percent" || nodes[element].value == "hp-percent") {
+                if(nodes[element].value == "ATK%" ||
+                        nodes[element].value == "Energy Recharge" || nodes[element].value == "Elemental Mastery" || 
+                        nodes[element].value == "DEF%" || nodes[element].value == "HP%") {
                     nodes[element].disabled = false;
                 }
                 else {
@@ -52,10 +52,10 @@ function updateOptions() {
         } break;
         case "goblet": { 
             for (element in nodes) {
-                if(nodes[element].value == "atk-percent" ||
-                        nodes[element].value == "def-percent" || nodes[element].value == "hp-percent" ||
-                        nodes[element].value == "em" || nodes[element].value == "elemental-dmg-bonus" || 
-                        nodes[element].value == "phys-dmg") {
+                if(nodes[element].value == "ATK%" ||
+                        nodes[element].value == "DEF%" || nodes[element].value == "HP%" ||
+                        nodes[element].value == "Elemental Mastery" || nodes[element].value == "Elemental DMG Bonus" || 
+                        nodes[element].value == "Physical DMG Bonus") {
                     nodes[element].disabled = false;
                 }
                 else {
@@ -65,10 +65,10 @@ function updateOptions() {
         } break;
         case "circlet": {
             for (element in nodes) {
-                if(nodes[element].value == "atk-percent" || 
-                        nodes[element].value == "def-percent" || nodes[element].value == "hp-percent" ||
-                        nodes[element].value == "crit" || nodes[element].value == "crit-dmg" ||
-                        nodes[element].value == "em" || nodes[element].value == "heal-bonus") {
+                if(nodes[element].value == "ATK%" || 
+                        nodes[element].value == "DEF%" || nodes[element].value == "HP%" ||
+                        nodes[element].value == "CRIT Rate" || nodes[element].value == "CRIT DMG" ||
+                        nodes[element].value == "Elemental Mastery" || nodes[element].value == "Healing Bonus") {
                     nodes[element].disabled = false;
                 }
                 else {
@@ -81,40 +81,40 @@ function updateOptions() {
 
 function updateValue() {
     switch(artifactFormDom.mainstatName.value) {
-        case "hp": {
+        case "HP": {
             artifactFormDom.mainstatValue.value = 4780;
         } break;
-        case "atk": {
+        case "ATK": {
             artifactFormDom.mainstatValue.value = 311;
         } break;
-        case "hp-percent": {
+        case "HP%": {
             artifactFormDom.mainstatValue.value = 46.6;
         } break;
-        case "atk-percent": {
+        case "ATK%": {
             artifactFormDom.mainstatValue.value = 46.6;
         }
-        case "elemental-dmg": {
+        case "Elemental DMG Bonus": {
             artifactFormDom.mainstatValue.value = 46.6;
         } break;
-        case "def-percent": {
+        case "DEF%": {
             artifactFormDom.mainstatValue.value = 58.3;
         } break;
-        case "phys-dmg": {
+        case "Physical DMG Bonus": {
             artifactFormDom.mainstatValue.value = 58.3;
         } break;
-        case "er": {
+        case "Energy Recharge": {
             artifactFormDom.mainstatValue.value = 51.8;
         } break;
-        case "em": {
+        case "Elemental Mastery": {
             artifactFormDom.mainstatValue.value = 186.5;
         } break;
-        case "crit": {
+        case "CRIT Rate": {
             artifactFormDom.mainstatValue.value = 31.1;
         } break;
-        case "crit-dmg": {
+        case "CRIT DMG": {
             artifactFormDom.mainstatValue.value = 62.2;
         } break;
-        case "heal-bonus": {
+        case "Healing Bonus": {
             artifactFormDom.mainstatValue.value = 35.9;
         } break;
     }

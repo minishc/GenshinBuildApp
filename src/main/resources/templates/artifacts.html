@@ -7,6 +7,10 @@
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
         <div class="main-container"></div>
-        <a th:href="@{/artifacts/save}"><button></button></a>
+        <span>
+            <h1 th:text="${user.username} + '\'s'"></h1>
+            <h1>Artifact Collection</h1>
+        </span>
+        <a th:href="@{/artifacts/save}"><button id="goto-save-form">Upload Artifacts</button></a>
     </body>
 </html>
