@@ -65,7 +65,7 @@ public class ArtifactController {
     }
 
     @PostMapping("/artifacts/upload")
-    public String parseUpload(@RequestParam("file-upload")MultipartFile file, RedirectAttributes redirectAttributes) {
+    public String parseUpload(@RequestParam("file-upload")MultipartFile file) {
         if(!file.isEmpty()) {
             List<ArtifactDto> dtos = ArtifactUtility.parseFile(file, 1L);//TODO: When implementing security make this based on the principal
             artifactService.saveFromDtoList(dtos);

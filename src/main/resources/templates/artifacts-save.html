@@ -8,7 +8,7 @@
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
         <div class="main-container">
-            <form th:action="@{/artifacts/save}" method="post" id="artifact-form">
+            <form th:action="@{/artifacts/save}" method="post" id="artifact-form" style="margin-top: 40px;">
                 <input type="text" name="set" id="artifact-set" th:field="*{artifactdto.set}">
                 <select name="slot" id="artifact-slot" th:field="*{artifactdto.slot}">
                     <option value="Flower" selected>Flower</option>
@@ -98,6 +98,12 @@
                 <button type="submit" th>Save Artifact</button>
             </form>
 
+
+            <p style="text-align: center; margin-top: 24px;">
+                You can upload a csv file here to have your artifacts uploaded
+                much easier. <br> The format is {Artifact Set},{Artifact Slot},{Mainstat Name},{Mainstat Value},{Substat1 Name},{Substat1 Value}, ... ,
+                {Substat4 Name},{Substat4 Value}{End of Line}
+            </p>
             <form th:action="@{/artifacts/upload}" method="post" id="file-form" enctype="multipart/form-data">
                 <input type="file" name="file-upload" id="file-upload">
                 <button type="submit">Upload</button>

@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -18,14 +19,13 @@ public class Artifact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @NonNull
+    @NotNull @NonNull
     String artifactSet;
-    @NonNull
+    @NotNull @NonNull
     String slot;
 
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "mainstat_id")
     private ArtifactMainstat mainstat;
 
@@ -42,6 +42,7 @@ public class Artifact {
     @JoinColumn(name = "user_id")
     private User user;
 
+    //Auto-generated toString, equals, hashCode methods
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

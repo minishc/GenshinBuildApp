@@ -6,11 +6,21 @@
 
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
-        <div class="main-container"></div>
-        <span>
-            <h1 th:text="${user.username} + '\'s'"></h1>
-            <h1>Artifact Collection</h1>
-        </span>
-        <a th:href="@{/artifacts/save}"><button id="goto-save-form">Upload Artifacts</button></a>
+        <div class="main-container">
+            <span style="text-align: center;">
+                <h1 th:text="${user.username} + '\'s'"></h1>
+                <h1>Artifact Collection</h1>
+            </span>
+            <div class="artifact-container">
+                <div class="single-artifact" th:each="artifact : ${artifacts}">
+                    <h4 id="artifact-name" class="artifact-info"></h4>
+                    <h6 th:text="${artifact.slot}" id="artifact-slot" class="artifact-info"></h6><div class="flex-break"></div>
+                    <span>
+                        <span th:text="${artifact.mainstat.statName}" class="stat-name"></span>
+                        <span th:text="${artifact.mainstat.statValue}" class="stat-value"></span>
+                    </span><div class="flex-break"></div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

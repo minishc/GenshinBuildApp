@@ -204,3 +204,42 @@ label {
     border: 4px #262b50 solid;
     background-color: #202442;
 }
+
+.artifact-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.single-artifact {
+    margin: 8px;
+    width: 250px;
+    height: 350px;
+    background-image: url("../images/artifactBox.png");
+    background-size: 250px 350px;
+}
+
+.artifact-info {
+    border: 1px slategray solid;
+    position: relative;
+}
+
+#artifact-name {
+    width: auto;
+    height: 25px;
+    left: 0px;
+    top: 0px;
+    margin: 0px;
+}
+
+#artifact-slot {
+    top: 5px;
+    width: auto;
+    left: 10px;
+    margin: 0px;
+}
+
+#file-form {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
