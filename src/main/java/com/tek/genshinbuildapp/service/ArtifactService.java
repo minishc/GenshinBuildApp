@@ -8,6 +8,7 @@ import com.tek.genshinbuildapp.model.Artifact;
 import com.tek.genshinbuildapp.model.ArtifactMainstat;
 import com.tek.genshinbuildapp.model.ArtifactSubstat;
 import com.tek.genshinbuildapp.model.User;
+import com.tek.genshinbuildapp.utility.ArtifactUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,8 @@ public class ArtifactService {
     }
 
     public void saveArtifact(long id, Artifact artifact, ArtifactMainstat mainstat, Set<ArtifactSubstat> substats) {
+        ArtifactSubstat[] substatArray = new ArtifactSubstat[4];
+        ArtifactUtility.validateSubstats(substats.toArray(substatArray));
         substatRepository.saveAll(substats);
         mainstatRepository.save(mainstat);
         artifact.setMainstat(mainstat);
