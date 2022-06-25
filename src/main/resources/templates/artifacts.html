@@ -14,11 +14,33 @@
             <div class="artifact-container">
                 <div class="single-artifact" th:each="artifact : ${artifacts}">
                     <h4 id="artifact-name" class="artifact-info"></h4>
-                    <h6 th:text="${artifact.slot}" id="artifact-slot" class="artifact-info"></h6><div class="flex-break"></div>
-                    <span>
-                        <span th:text="${artifact.mainstat.statName}" class="stat-name"></span>
-                        <span th:text="${artifact.mainstat.statValue}" class="stat-value"></span>
-                    </span><div class="flex-break"></div>
+                    <h6 th:text="${artifact.slot}" id="artifact-slot" class="artifact-info"></h6>
+                    <span id="mainstat-box">
+                        <span th:switch="${#strings.contains(artifact.mainstat.statName, '%') }">
+                            <span th:case="true">
+                                <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name artifact-info"></h6>
+                                <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}" class="artifact-info"></h2>
+                            </span>
+                            <span th:case="false">
+                                <span th:if="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
+                                    <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name artifact-info"></h6>
+                                    <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}" class="artifact-info"></h2>
+                                </span>
+                                <span th:unless="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
+                                    <h6 th:text="${artifact.mainstat.statName}" class="stat-name artifact-info"></h6>
+                                    <h2 th:text="${#numbers.formatInteger(artifact.mainstat.statValue, 1, 'COMMA')}" class="artifact-info"></h2>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+
+                    <div id="substat-box" class="artifact-info">
+
+                    </div>
+                    <img class="artifact-info" id="artifact-image">
+                    <div id="flavor-text" class="artifact-info">
+                        
+                    </div>
                 </div>
             </div>
         </div>

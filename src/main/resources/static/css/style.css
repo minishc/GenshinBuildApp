@@ -233,13 +233,58 @@ label {
 
 #artifact-slot {
     top: 5px;
-    width: auto;
-    left: 10px;
+    width: 240px;
+    left: 15px;
     margin: 0px;
+}
+
+#mainstat-box {
+    left: 15px;
+    top: 35px;
+    margin: 0px;
+    width: 150px;
+    position: relative;
+}
+
+#mainstat-box h6 {
+    font-size: 7pt;
+    color: #949494;
+    margin: 0px;
+    width: 125px;
+}
+
+#mainstat-box h2 {
+    font-size: 16pt;
+    margin: 0px;
+    width: 125px;
 }
 
 #file-form {
     margin-top: 16px;
     display: flex;
     justify-content: center;
+}
+
+#substat-box {
+    position: relative;
+    height: 100px;
+    width: 180px;
+    left: 30px;
+    top: 100px;
+}
+
+#artifact-image {
+    height: 80px;
+    width: 80px;
+    position: relative;
+    left: 150px;
+    top: -145px
+}
+
+#flavor-text {
+    position: relative;
+    left: 15px;
+    width: 210px;
+    height: 50px;
+    top: 18px;
 }
