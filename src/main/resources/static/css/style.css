@@ -138,6 +138,12 @@ input[type=number]{
     -moz-appearance: textfield;
 }
 
+#file-form {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
 #artifact-form {
     display: flex;
     flex-flow: row wrap;
@@ -225,10 +231,11 @@ label {
 
 #artifact-name {
     width: auto;
-    height: 25px;
+    height: 30px;
     left: 0px;
     top: 0px;
     margin: 0px;
+    position: relative;
 }
 
 #artifact-slot {
@@ -236,11 +243,12 @@ label {
     width: 240px;
     left: 15px;
     margin: 0px;
+    position: relative;
 }
 
 #mainstat-box {
     left: 15px;
-    top: 35px;
+    top: 45px;
     margin: 0px;
     width: 150px;
     position: relative;
@@ -259,18 +267,19 @@ label {
     width: 125px;
 }
 
-#file-form {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-}
-
 #substat-box {
     position: relative;
-    height: 100px;
+    height: 95px;
     width: 180px;
-    left: 30px;
-    top: 100px;
+    left: 25px;
+    top: 95px;
+    color: #51515d;
+    padding-top: 6px;
+}
+
+#substat-box h6 {
+    margin-top: 0px;
+    margin-bottom: 6.5px;
 }
 
 #artifact-image {
@@ -287,4 +296,8 @@ label {
     width: 210px;
     height: 50px;
     top: 18px;
+}
+
+.substat-entry {
+    font-size: 12px;
 }
