@@ -7,10 +7,12 @@
 
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"/>
-        <div class="main-container">
+        <div class="main-content">
             <form th:action="@{/artifacts/save}" method="post" id="artifact-form" style="margin-top: 40px;">
-                <input type="text" name="set" id="artifact-set" th:field="*{artifactdto.set}">
-                <select name="slot" id="artifact-slot" th:field="*{artifactdto.slot}">
+                <label for="artifact-set">Artifact Set:</label>
+                <input type="text" name="set" id="artifact-set" th:field="*{artifactdto.set}"><div class="flex-break"></div>
+                <label for="artifact-slot">Equip Slot</label>
+                <select name="slot" id="artifact-slot" th:field="*{artifactdto.slot}" style="margin-top: 10px">
                     <option value="Flower" selected>Flower</option>
                     <option value="Plume">Plume</option>
                     <option value="Sands">Sands</option>
