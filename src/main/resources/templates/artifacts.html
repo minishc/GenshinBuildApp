@@ -12,10 +12,6 @@
                 <h1>Artifact Collection</h1>
             </span>
             <div class="artifact-container">
-                <script th:inline="javascript">
-                    artifactSets = [];
-                    artifactSlots = [];
-                </script>
                 <div class="single-artifact" th:each="artifact : ${artifacts}">
                     <script th:inline="javascript">
                         artifactSets.push([[${artifact.artifactSet}]]);

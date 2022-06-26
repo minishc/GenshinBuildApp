@@ -41,6 +41,23 @@ public class ArtifactService {
 
     public void saveArtifact(long id, Artifact artifact, ArtifactMainstat mainstat, Set<ArtifactSubstat> substats) {
         ArtifactSubstat[] substatArray = new ArtifactSubstat[4];
+        switch(artifact.getSlot().toLowerCase()) {
+            case "flower": {
+                artifact.setSlot("Flower of Life");
+            } break;
+            case "plume": {
+                artifact.setSlot("Plume of Death");
+            } break;
+            case "sands": {
+                artifact.setSlot("Sands of Eon");
+            } break;
+            case "goblet": {
+                artifact.setSlot("Goblet of Eonothem");
+            } break;
+            case "circlet": {
+                artifact.setSlot("Circlet of Logos");
+            } break;
+        }
         ArtifactUtility.validateSubstats(substats.toArray(substatArray));
         substatRepository.saveAll(substats);
         mainstatRepository.save(mainstat);
