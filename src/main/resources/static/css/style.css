@@ -94,7 +94,7 @@ body {
 
 .card-container {
     width: 100px;
-    height: 120px;
+    height: 150px;
     border-radius: 10px;
     background-color:#262b50;
     margin: 5px;
@@ -209,15 +209,7 @@ label {
     align-items: center;
 }
 
-#build-button {
-    width: 240px;
-    height: 60px;
-    background-color: #202442;
-    color: #FFFFFF;
-    border: 4px #262b50 solid;
-}
-
-#back-to-characters {
+button {
     color: #FFFFFF;
     width: 240px;
     height: 60px;
@@ -319,4 +311,21 @@ label {
 
 .substat-entry {
     font-size: 12px;
+}
+
+#build-content {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 40px;
+    background-color: #202442;
+}
+
+/* Temp selector for build elements*/
+.build-element {
+    border: 4px slategray solid;
+}
+
+#build-character {
+    width: 150px;
+    height: 300px;
 }

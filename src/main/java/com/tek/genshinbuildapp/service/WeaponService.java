@@ -35,4 +35,6 @@ public class WeaponService {
     public List<Weapon> retrieveWeapons() {
         return weaponRepository.findAll();
     }
+
+
 }
