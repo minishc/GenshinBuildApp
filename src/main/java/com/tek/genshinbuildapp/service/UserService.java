@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -41,5 +42,12 @@ public class UserService {
 
     public List<Character> retrieveCharacters(long id) {
         return userRepository.findAllCharactersById(id);
+    }
+
+    public void removeAllCharacters(User user, Set<Character> characters) {
+        Set<Character> original = user.getCharacters();
+        characters.forEach(original::remove);
+        user.setCharacters(original);
+        userRepository.save(user);
     }
 }

@@ -15,11 +15,12 @@
                 <div class="card-container" th:each="character : ${characterList}">
                     <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
                     <a th:href="@{'/character/'+${character.name}}"><p th:text="${character.name}"></p></a>
-                    <label for="character-owned" style="font-size: 10px; margin: 0px">Owned?</label>
                     <span th:if="${#lists.contains(user.characters, character)}">
-                        
+                        <label for="to-delete" style="font-size: 10px; margin: 0px">Remove from account?</label><br>
+                        <input type="checkbox" name="to-delete" id="to-delete" th:field="${user.removeCharacter}" th:value="${character.id}">
                     </span>
                     <span th:unless="${#lists.contains(user.characters, character)}">
+                        <label for="character-owned" style="font-size: 10px; margin: 0px">Add to account?</label><br>
                         <input type="checkbox" name="character-owned" id="character-owned" th:field="${user.characters}" th:value="${character.id}">
                     </span>
                 </div>

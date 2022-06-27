@@ -18,7 +18,7 @@ import java.util.Set;
 @Entity
 public class Weapon {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
     @NonNull
     String name;
     @NonNull

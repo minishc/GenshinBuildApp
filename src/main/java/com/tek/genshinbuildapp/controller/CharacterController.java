@@ -1,5 +1,7 @@
 package com.tek.genshinbuildapp.controller;
 
+import com.tek.genshinbuildapp.dto.UserDto;
+import com.tek.genshinbuildapp.model.Character;
 import com.tek.genshinbuildapp.model.User;
 import com.tek.genshinbuildapp.service.CharacterService;
 import com.tek.genshinbuildapp.service.UserService;
@@ -7,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,21 +34,26 @@ public class CharacterController {
     }
 
     @GetMapping("/characters")
-    public String showCharacters(Model model, RedirectAttributes attributes) {
+    public String showCharacters(Model model) {
         //TODO: when implementing spring security set this to use the principal
         User user = userService.retrieveUser(1);
-        model.addAttribute("user", user);
-        attributes.addFlashAttribute("user", user);
+        UserDto dto = new UserDto(user.getId());
+        dto.setCharacters(user.getCharacters());
+        model.addAttribute("user", dto);
         model.addAttribute("characterList", characterService.retrieveCharacters());
         return "characters";
     }
 
     @PostMapping("/characters/{id}")
-    public String updateCharacterList(@ModelAttribute("user") User user, Model model,
-                                      @PathVariable("id") long id) {
+    public String updateCharacterList(@ModelAttribute("UserDto") UserDto user,
+                                       @PathVariable("id") long id) {
         User original = userService.retrieveUser(1);
-        original.setCharacters(user.getCharacters());
+        user.getCharacters().forEach(original.getCharacters()::add);
         userService.saveUser(original);
+        if(user.getRemoveCharacter() != null) {
+            userService.removeAllCharacters(original, user.getRemoveCharacter());
+            log.info(user.getRemoveCharacter().toString());
+        }
         return "redirect:/characters";
     }
 
