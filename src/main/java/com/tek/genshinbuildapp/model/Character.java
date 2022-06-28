@@ -41,6 +41,7 @@ public class Character {
     double baseEnergyRecharge;
     double baseHealingPercent;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "characters", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private Set<User> users = new LinkedHashSet<>();
 

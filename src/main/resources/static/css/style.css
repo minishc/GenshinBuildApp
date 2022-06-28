@@ -245,6 +245,8 @@ button {
 }
 
 #artifact-slot {
+    top: 5px;
+    left: 15px;
     width: 240px;
     margin: 0px;
     position: relative;
@@ -314,18 +316,65 @@ button {
 }
 
 #build-content {
-    width: 80%;
-    margin-left: 10%;
+    width: 60%;
+    min-width: 780px;
+    margin-left: 20%;
     margin-top: 40px;
     background-color: #202442;
+    min-height: 700px;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 160px 160px 160px auto;
+    padding: 5px;
 }
 
-/* Temp selector for build elements*/
-.build-element {
-    border: 4px slategray solid;
-}
-
-#build-character {
+.build-character-weapon {
     width: 150px;
     height: 300px;
+    margin: 5px;
+}
+
+.build-character-weapon img {
+    width: 150px;
+    height: 150px;
+}
+
+.build-character-weapon div {
+    width: 150px;
+    height: 150px;
+}
+
+.build-artifacts {
+    margin: 5px;
+    height: 608px;
+    width: 155px;
+}
+
+.build-artifact-container {
+    position: absolute;
+    z-index: 1;
+}
+
+.artifact-placeholder {
+    width: 150px;
+    height: 150px;
+}
+
+#build-stats {
+    margin: 5px;
+    min-width: 300px;
+    height: auto;
+    max-height: 487.5px;
+    border: 4px #262b50 solid;
+}
+
+#build-stats p {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0px;
+    font-size: 18pt;
+}
+
+select {
+    width: 150px;
 }
