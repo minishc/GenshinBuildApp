@@ -398,3 +398,7 @@ select {
 #register-form label {
     width: 200px;
 }
+
+#users-table {
+    width: 100%;
+}

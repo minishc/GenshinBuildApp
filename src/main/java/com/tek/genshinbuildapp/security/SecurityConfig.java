@@ -59,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/admin", "/admin/**").hasAuthority(ADMIN)
                 .antMatchers("/artifacts", "/artifacts/save").hasAnyAuthority(USER, ADMIN)
                 .antMatchers("/builds", "/builds/**").hasAnyAuthority(USER, ADMIN)
                 .antMatchers("/characters/update/**", "/weapons/update/**").hasAnyAuthority(USER, ADMIN)

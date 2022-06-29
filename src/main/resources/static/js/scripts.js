@@ -29,7 +29,7 @@ function init() {
 }
 
 function verifyPassword() {
-    var password = document.getElementById("password").value;
+    var password = document.getElementById("enter-your-password").value;
     var confirm = document.getElementById("confirm-password").value;
     var button = document.getElementById("register-button");
     var message = document.getElementById("password-message");

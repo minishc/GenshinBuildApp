@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <div th:replace="fragments/head :: head"></div>
+    </head>
+
+    <body>
+        <div th:replace="fragments/nav-bar :: nav-bar"></div>
+        <div class="main-content">
+            <table id="users-table">
+                <tr>
+                    <th>User</th>
+                    <th>Authorities</th>
+                    <th>Delete User</th>
+                </tr>
+
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.user.username}"></td>
+                    <td>
+                        <span th:each="auth : ${user.authGroups}">
+                            <p th:text="${auth.authority}"></p>
+                        </span>
+                    </td>
+                    <td>
+                        <form th:action="@{'/admin/deleteUser/'+${user.user.id}}" th:unless="${#lists.contains(authGroups, 'ROLE_ADMIN')}">DELETE</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
