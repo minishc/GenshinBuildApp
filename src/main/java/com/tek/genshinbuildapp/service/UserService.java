@@ -1,12 +1,14 @@
 package com.tek.genshinbuildapp.service;
 
 import com.tek.genshinbuildapp.dao.UserRepository;
+import com.tek.genshinbuildapp.model.Character;
 import com.tek.genshinbuildapp.model.User;
+import com.tek.genshinbuildapp.model.Weapon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -29,6 +31,13 @@ public class UserService {
     }
 
     public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    public void removeAllCharacters(User user, Set<Character> characters) {
+        Set<Character> original = user.getCharacters();
+        characters.forEach(original::remove);
+        user.setCharacters(original);
         userRepository.save(user);
     }
 }

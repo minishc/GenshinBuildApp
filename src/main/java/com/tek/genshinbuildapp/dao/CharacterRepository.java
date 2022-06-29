@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
+
     Optional<Character> findCharacterByName(String name);
 }

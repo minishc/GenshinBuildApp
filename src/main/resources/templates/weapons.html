@@ -9,12 +9,22 @@
         <div class="main-content">
             <h1>Weapons</h1>
             <p>This is a list of weapons currently in the game, hover over the weapon for more information</p>
-            <div class="weapon-container">
-                <div class="card-container" th:each="weapon : ${weapons}">
+            <form class="weapon-container" th:action="@{'/weapons/'+${user.id}}" method="post" th:object="${user}">
+                <div class="card-container" th:each="weapon : ${weaponList}">
                     <img th:src="${weapon.weaponImage}" alt="${weapon.name}" class="weapon-thumb">
                     <p th:text="${weapon.name}"></p>
+                    <span th:if="${#lists.contains(user.weapons, weapon)}">
+                        <label for="to-delete" style="margin: 0px; font-size: 10px">Remove from account?</label><br>
+                        <input type="checkbox" name="to-delete" id="to-delete" th:field="${user.removeWeapon}" th:value="${weapon.id}">
+                    </span>
+                    <span th:unless="${#lists.contains(user.weapons, weapon)}">
+                        <label for="to-add" style="margin: 0px; font-size: 10px;">Add to account?</label><br>
+                        <input type="checkbox" name="to-add" id="to-add" th:field="${user.weapons}" th:value="${weapon.id}">
+                    </span>
                 </div>
-            </div>
+                <div class="flex-break"></div>
+                <button type="submit">Update your weapons</button>
+            </form>
         </div>
     </body>
 </html>

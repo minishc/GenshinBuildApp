@@ -14,11 +14,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Weapon {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    int id;
     @NonNull
     String name;
     @NonNull
@@ -33,9 +34,11 @@ public class Weapon {
     @JoinColumn
     WeaponSecondaryStat secondaryStat;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "weapon", orphanRemoval = true)
     private Set<Build> builds = new LinkedHashSet<>();
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "weapons")
     private Set<User> users = new LinkedHashSet<>();
 

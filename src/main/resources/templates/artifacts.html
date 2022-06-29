@@ -12,63 +12,68 @@
                 <h1>Artifact Collection</h1>
             </span>
             <div class="artifact-container">
-                <div class="single-artifact" th:each="artifact : ${artifacts}">
-                    <script th:inline="javascript">
-                        artifactSets.push([[${artifact.artifactSet}]]);
-                        artifactSlots.push([[${artifact.slot}]]);
-                    </script>
-                    <h4 id="artifact-name" class="artifact-name"></h4>
-                    <h6 th:text="${artifact.slot}" id="artifact-slot"></h6>
-                    <span id="mainstat-box">
-                        <span th:switch="${#strings.contains(artifact.mainstat.statName, '%') }">
-                            <span th:case="true">
-                                <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
-                                <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
-                            </span>
-                            <span th:case="false">
-                                <span th:if="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
-                                    <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
-                                    <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
-                                </span>
-                                <span th:if="${#strings.contains(artifact.mainstat.statName, 'Recharge')}">
-                                    <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
-                                    <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
-                                </span>
-                                <span th:unless="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
-                                    <h6 th:text="${artifact.mainstat.statName}" class="stat-name"></h6>
-                                    <h2 th:text="${#numbers.formatInteger(artifact.mainstat.statValue, 1, 'COMMA')}"></h2>
-                                </span>
-                            </span>
-                        </span>
-                    </span>
-
-                    <div id="substat-box">
-                        <span th:each="substat : ${artifact.substats}">
-                            <span th:switch="${#strings.contains(substat.statName, '%')}">
+                <div class="single-artifact-holder" th:each="artifact : ${artifacts}">
+                    <div class="single-artifact">
+                        <script th:inline="javascript">
+                            artifactSets.push([[${artifact.artifactSet}]]);
+                            artifactSlots.push([[${artifact.slot}]]);
+                        </script>
+                        <h4 id="artifact-name" class="artifact-name"></h4>
+                        <h6 th:text="${artifact.slot}" id="artifact-slot"></h6>
+                        <span id="mainstat-box">
+                            <span th:switch="${#strings.contains(artifact.mainstat.statName, '%') }">
                                 <span th:case="true">
-                                    <span th:text="${#strings.replace(substat.statName, '%', '')}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatPercent(substat.statValue / 100, 1, 1)}" class="substat-entry"></span>
-                                    <div></div>
+                                    <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
+                                    <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
                                 </span>
                                 <span th:case="false">
-                                    <span th:if="${#strings.contains(substat.statName, 'Recharge')}">
-                                        <span th:text="${substat.statName}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatPercent(substat.statValue / 100, 1, 1)}" class="substat-entry"></span><div></div>
+                                    <span th:if="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
+                                        <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
+                                        <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
                                     </span>
-                                    <span th:unless="${#strings.contains(substat.statName, 'Recharge')}">
-                                        <span th:if="${#strings.contains(substat.statName, 'CRIT')}">
-                                            <span th:text="${substat.statName}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatPercent(substat.statValue / 100, 1, 1)}" class="substat-entry"></span><div></div>
-                                        </span>
-                                        <span th:unless="${#strings.contains(substat.statName, 'CRIT')}">
-                                            <span th:text="${substat.statName}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatInteger(substat.statValue, 1)}" class="substat-entry"></span><div></div>
-                                        </span>
+                                    <span th:if="${#strings.contains(artifact.mainstat.statName, 'Recharge')}">
+                                        <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
+                                        <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
+                                    </span>
+                                    <span th:unless="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
+                                        <h6 th:text="${artifact.mainstat.statName}" class="stat-name"></h6>
+                                        <h2 th:text="${#numbers.formatInteger(artifact.mainstat.statValue, 1, 'COMMA')}"></h2>
                                     </span>
                                 </span>
                             </span>
                         </span>
-                    </div>
-                    <img class="artifact-image">
-                    <div class="flavor-text-box">
 
+                        <div id="substat-box">
+                            <span th:each="substat : ${artifact.substats}">
+                                <span th:switch="${#strings.contains(substat.statName, '%')}">
+                                    <span th:case="true">
+                                        <span th:text="${#strings.replace(substat.statName, '%', '')}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatPercent(substat.statValue / 100, 1, 1)}" class="substat-entry"></span>
+                                        <div></div>
+                                    </span>
+                                    <span th:case="false">
+                                        <span th:if="${#strings.contains(substat.statName, 'Recharge')}">
+                                            <span th:text="${substat.statName}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatPercent(substat.statValue / 100, 1, 1)}" class="substat-entry"></span><div></div>
+                                        </span>
+                                        <span th:unless="${#strings.contains(substat.statName, 'Recharge')}">
+                                            <span th:if="${#strings.contains(substat.statName, 'CRIT')}">
+                                                <span th:text="${substat.statName}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatPercent(substat.statValue / 100, 1, 1)}" class="substat-entry"></span><div></div>
+                                            </span>
+                                            <span th:unless="${#strings.contains(substat.statName, 'CRIT')}">
+                                                <span th:text="${substat.statName}" class="substat-entry"></span><span class="substat-entry">+</span><span th:text="${#numbers.formatInteger(substat.statValue, 1)}" class="substat-entry"></span><div></div>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <img class="artifact-image">
+                        <div class="flavor-text-box">
+
+                        </div>
                     </div>
+                    <form th:action="@{'/artifacts/delete/'+${artifact.id}}" method="post">
+                        <button type="submit" style="margin-left: 5px;">Delete artifact</button>
+                    </form>
                 </div>
             </div>
         </div>

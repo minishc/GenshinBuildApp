@@ -1,31 +1,60 @@
 package com.tek.genshinbuildapp.controller;
 
+import com.tek.genshinbuildapp.dto.UserDto;
+import com.tek.genshinbuildapp.model.Character;
+import com.tek.genshinbuildapp.model.User;
 import com.tek.genshinbuildapp.service.CharacterService;
+import com.tek.genshinbuildapp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 
 @Controller
 @Slf4j
 public class CharacterController {
 
     private CharacterService characterService;
+    private UserService userService;
 
     @Autowired
-    public CharacterController(CharacterService characterService) {
+    public CharacterController(CharacterService characterService,
+                               UserService userService) {
         this.characterService = characterService;
+        this.userService = userService;
     }
 
     @GetMapping("/characters")
     public String showCharacters(Model model) {
-        model.addAttribute("characters", characterService.retrieveCharacters());
+        //TODO: when implementing spring security set this to use the principal
+        User user = userService.retrieveUser(1);
+        UserDto dto = new UserDto(user.getId());
+        dto.setCharacters(user.getCharacters());
+        model.addAttribute("user", dto);
+        model.addAttribute("characterList", characterService.retrieveCharacters());
         return "characters";
+    }
+
+    @PostMapping("/characters/{id}")
+    public String updateCharacterList(@ModelAttribute("UserDto") UserDto user,
+                                       @PathVariable("id") long id) {
+        User original = userService.retrieveUser(1);
+        user.getCharacters().forEach(original.getCharacters()::add);
+        userService.saveUser(original);
+        if(user.getRemoveCharacter() != null) {
+            userService.removeAllCharacters(original, user.getRemoveCharacter());
+            log.info(user.getRemoveCharacter().toString());
+        }
+        return "redirect:/characters";
     }
 
     @GetMapping("/character/{name}")

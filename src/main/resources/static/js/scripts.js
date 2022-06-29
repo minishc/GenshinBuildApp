@@ -4,6 +4,7 @@ window.onload = init;
 
 function init() {
     if(artifactSets != undefined && artifactSets != null) {
+        console.log("Main script file loaded");
         var names = document.getElementsByClassName('artifact-name');
         var flavorTexts = document.getElementsByClassName('flavor-text-box');
         var images = document.getElementsByClassName('artifact-image');

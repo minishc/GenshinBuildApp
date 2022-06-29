@@ -10,15 +10,22 @@
         <div class="main-content">
             <h1>Characters</h1>
             <p>Click on a character for a more detailed look at their stats</p>
-            <span th:if="${message ne null}"><p th:th:text="#{message}"></p></span>
-            <div class="character-container">
-                <a th:href="@{'/character/'+${character.name}}" th:each="character : ${characters}" style="margin: 6px;">
-                    <div class="card-container">
-                        <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
-                        <p th:text="${character.name}"></p>
-                    </div>
-                </a>
-            </div>
+            <span th:if="${message ne null}"><p th:text="#{message}"></p></span>
+            <form class="character-container" th:action="@{'/characters/'+${user.id}}" method="post" th:object="${user}">
+                <div class="card-container" th:each="character : ${characterList}">
+                    <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
+                    <a th:href="@{'/character/'+${character.name}}"><p th:text="${character.name}"></p></a>
+                    <span th:if="${#lists.contains(user.characters, character)}">
+                        <label for="to-delete" style="font-size: 10px; margin: 0px">Remove from account?</label><br>
+                        <input type="checkbox" name="to-delete" id="to-delete" th:field="${user.removeCharacter}" th:value="${character.id}">
+                    </span>
+                    <span th:unless="${#lists.contains(user.characters, character)}">
+                        <label for="character-owned" style="font-size: 10px; margin: 0px">Add to account?</label><br>
+                        <input type="checkbox" name="character-owned" id="character-owned" th:field="${user.characters}" th:value="${character.id}">
+                    </span>
+                </div>
+                <button type="submit">Update my characters</button>
+            </form>
         </div>
     </body>
 </html>

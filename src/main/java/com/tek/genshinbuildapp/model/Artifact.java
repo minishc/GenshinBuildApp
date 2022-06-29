@@ -13,6 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Artifact {
@@ -29,32 +30,20 @@ public class Artifact {
     @JoinColumn(name = "mainstat_id")
     private ArtifactMainstat mainstat;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "artifact_substats",
-            joinColumns = @JoinColumn(name = "artifact_id"),
-            inverseJoinColumns = @JoinColumn(name = "substat_id"))
+            joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id"))
     private Set<ArtifactSubstat> substats = new LinkedHashSet<>();
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "artifacts")
     private Set<Build> builds = new LinkedHashSet<>();
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    //Auto-generated toString, equals, hashCode methods
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        String addToBuilder = artifactSet + ", " + slot + ", " +
-                mainstat.getStatName() + " " + mainstat.getStatValue();
-        stringBuilder.append(addToBuilder);
-        for(ArtifactSubstat artifactSubstat : substats) {
-            addToBuilder = ", " + artifactSubstat.getStatName() + " " + artifactSubstat.getStatValue();
-            stringBuilder.append(addToBuilder);
-        }
-        return stringBuilder.toString();
-    }
 
     @Override
     public boolean equals(Object o) {
