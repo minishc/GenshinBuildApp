@@ -47,7 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 
     @Override
@@ -60,12 +62,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/artifacts", "/artifacts/save").hasAnyAuthority(USER, ADMIN)
                 .antMatchers("/builds", "/builds/**").hasAnyAuthority(USER, ADMIN)
                 .antMatchers("/characters/update/**", "/weapons/update/**").hasAnyAuthority(USER, ADMIN)
-                .antMatchers("/", "/login", "/register",
+                .antMatchers("/", "/login", "/register", "/login/**",
                         "/characters", "/characters/**", "/weapons").permitAll()
                 .and()
-                .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
+                .formLogin().loginPage("/login")
+                .usernameParameter("username").passwordParameter("password")
                 .loginProcessingUrl("/login/authenticate")
-                .defaultSuccessUrl("/").failureUrl("/login/error").permitAll()
+                .defaultSuccessUrl("/")
+                .failureUrl("/error").permitAll()
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")).
                 logoutSuccessUrl("/logout/success").permitAll();

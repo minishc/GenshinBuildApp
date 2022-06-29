@@ -28,6 +28,32 @@ function init() {
     }
 }
 
+function verifyPassword() {
+    var password = document.getElementById("password").value;
+    var confirm = document.getElementById("confirm-password").value;
+    var button = document.getElementById("register-button");
+    var message = document.getElementById("password-message");
+    if(password != confirm && (password.length < 8 || confirm.length < 8)) {
+        button.disabled = true;
+        message.hidden = false;
+        message.innerHTML = "Please enter a password of at least 8 characters. <br> Passwords do not match.";
+    }
+    else if(password != confirm) {
+        message.innerHTML = "Passwords do not match."
+        message.hidden = false;
+        button.disabled = true;
+    }
+    else if(password.length < 8 || confirm.length < 8) {
+        message.innerHTML = "Please enter a password of at least 8 characters.";
+        message.hidden = false;
+        button.disabled = true;
+    }
+    else {
+        button.disabled = false;
+        message.hidden = true;
+    }
+}
+
 const artifactMetaData = {
     gladiator: {
         flower: {

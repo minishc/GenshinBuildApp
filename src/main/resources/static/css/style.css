@@ -382,3 +382,19 @@ button {
 select {
     width: 150px;
 }
+
+#login-form {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+#register-form {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+#register-form label {
+    width: 200px;
+}

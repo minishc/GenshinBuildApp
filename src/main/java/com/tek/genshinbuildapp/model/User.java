@@ -49,7 +49,7 @@ public class User implements Serializable {
 
     public User(@NonNull String username, @NonNull String password) {
         this.username = username;
-        this.password = new BCryptPasswordEncoder().encode(password);
+        this.password = new BCryptPasswordEncoder(4).encode(password);
     }
 
     public User(long id, @NonNull String username, @NonNull String password) {
