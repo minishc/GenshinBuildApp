@@ -12,7 +12,8 @@ option {
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     font-family: genshinFont;
     color: #FFFFFF;
     background-color: #262b50;
@@ -56,6 +57,7 @@ body {
     padding-right: 16px;
     font-size: 14px;
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 .nav-bar ul {

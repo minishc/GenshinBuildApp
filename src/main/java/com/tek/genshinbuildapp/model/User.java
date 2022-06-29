@@ -2,26 +2,27 @@ package com.tek.genshinbuildapp.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     @NonNull
     @Column(unique = true, length = 20)
     String username;
     @NonNull
-    @Column(length = 32)
+    @Setter(AccessLevel.NONE)
     String password;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
@@ -42,10 +43,19 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "characters_id", referencedColumnName = "id"))
     private Set<Character> characters = new LinkedHashSet<>();
 
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder(4).encode(password);
+    }
+
+    public User(@NonNull String username, @NonNull String password) {
+        this.username = username;
+        this.password = new BCryptPasswordEncoder().encode(password);
+    }
+
     public User(long id, @NonNull String username, @NonNull String password) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.password = new BCryptPasswordEncoder(4).encode(password);
     }
 
     @Override

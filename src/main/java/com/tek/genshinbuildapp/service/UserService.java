@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service
@@ -27,6 +28,16 @@ public class UserService {
         }
         else {
             throw new EntityNotFoundException("No user with id: " + id);
+        }
+    }
+
+    public User retrieveUser(String username) {
+        Optional<User> result = userRepository.findByUsername(username);
+        if(result.isPresent()) {
+            return result.get();
+        }
+        else {
+            throw new EntityNotFoundException("No user with username: " + username);
         }
     }
 

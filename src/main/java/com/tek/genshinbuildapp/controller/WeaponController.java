@@ -39,7 +39,7 @@ public class WeaponController {
         return "weapons";
     }
 
-    @PostMapping("/weapons/{id}")
+    @PostMapping("/weapons/update/{id}")
     public String saveWeapons(@ModelAttribute("user") UserDto user,
                                 @PathVariable("id") long id) {
         User original = userService.retrieveUser(id);

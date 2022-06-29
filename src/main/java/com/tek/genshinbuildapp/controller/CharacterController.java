@@ -44,7 +44,7 @@ public class CharacterController {
         return "characters";
     }
 
-    @PostMapping("/characters/{id}")
+    @PostMapping("/characters/update/{id}")
     public String updateCharacterList(@ModelAttribute("UserDto") UserDto user,
                                        @PathVariable("id") long id) {
         User original = userService.retrieveUser(1);
