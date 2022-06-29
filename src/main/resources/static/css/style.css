@@ -222,6 +222,10 @@ button {
     flex-flow: row wrap;
 }
 
+.single-artifact-holder {
+    height: 410px;
+}
+
 .single-artifact {
     margin: 8px;
     width: 250px;

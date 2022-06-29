@@ -30,7 +30,7 @@ public class Artifact {
     @JoinColumn(name = "mainstat_id")
     private ArtifactMainstat mainstat;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "artifact_substats",
             joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id"))

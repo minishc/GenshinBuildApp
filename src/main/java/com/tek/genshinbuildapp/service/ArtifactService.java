@@ -78,4 +78,8 @@ public class ArtifactService {
             saveArtifact(dto.getUserId(), artifact, mainstat, substats);
         }
     }
+
+    public void deleteArtifact(long id) {
+        artifactRepository.deleteById(id);
+    }
 }
