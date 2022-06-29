@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -16,7 +17,7 @@ import javax.persistence.Id;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class ArtifactMainstat {
+public class ArtifactMainstat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
