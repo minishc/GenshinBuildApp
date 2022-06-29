@@ -316,10 +316,8 @@ button {
 }
 
 #build-content {
-    width: 60%;
+    width: 100%;
     min-width: 780px;
-    margin-left: 20%;
-    margin-top: 40px;
     background-color: #202442;
     min-height: 700px;
     display: grid;
@@ -350,9 +348,9 @@ button {
     width: 155px;
 }
 
-.build-artifact-container {
-    position: absolute;
-    z-index: 1;
+.build-artifacts div {
+    width: 150px;
+    height: 250px;
 }
 
 .artifact-placeholder {

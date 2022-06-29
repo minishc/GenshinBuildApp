@@ -3,118 +3,153 @@
     <head>
         <div th:replace="fragments/head :: head"></div>
         <script defer th:src="@{js/build.js}" type="text/javascript"></script>
-        <script th:inline="javascript">
-            var artifacts = [];
-        </script>
     </head>
 
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"></div>
-        <form id="build-content" th:object="${build}" th:action="@{'/builds/'+${user.id}}" method="post">
-            <div>
-                <div class="build-character-weapon" id="selected-character">
-                    <img th:src="@{images/addToBuild.png}" alt="character" id="placeholder-character"><br>
-                    <select th:field="${build.character}" name="build-character" id="build-character">
-                        <option th:each="character : ${characters}" th:value="${character}">
-                            <p th:text="${character.name}"></p>
-                        </option>
-                    </select>
-                    
-                </div>
-                <div class="build-character-weapon" id="selected-weapon">
-                    <img th:src="@{images/addToBuild.png}" alt="weapon">
-                    <select th:field="${build.weapon}" name="build-weapon" id="build-weapon">
-                        <option th:each="weapon : ${weapons}" th:value="${weapon}">
-                            <p th:text="${weapon.name}"></p>
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="build-artifacts">
-                <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder" id="flower-slot">
-                <select th:field="${build.artifacts}">
-                    <div th:each="artifact :${artifacts}">
-                        <option th:if="${#strings.contains(artifact.slot, 'Flower')}" th:value="${artifact.id}">
-                            <div th:each="substat : ${artifact.substats}">
-                                <p th:text="${substat.statName}"></p>
-                                <p th:text="${substat.statValue}"></p>
-                            </div>
-                        </option>
+        <form style="width: 60%; margin-left: 20%; margin-top: 40px; display: flex; justify-content: center; 
+                            background-color: #202442; flex-flow: row wrap;"
+                 th:object="${build}" th:action="@{'/builds/'+${user.id}}" method="post">
+            <div id="build-content">
+                <div>
+                    <div class="build-character-weapon" id="selected-character">
+                        <img th:src="@{images/addToBuild.png}" alt="character" id="placeholder-character"><br>
+                        <select th:field="${build.character}" name="build-character" id="build-character">
+                            <option th:each="character : ${characters}" th:value="${character}">
+                                <p th:text="${character.name}"></p>
+                            </option>
+                        </select>
+                        
                     </div>
-                </select>
-                <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder" id="feather-slot">
-                <select th:field="${build.artifacts}">
-                    
-                </select>
-                <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder" id="sands-slot">
-                <select th:field="${build.artifacts}">
-
-                </select>
+                    <div class="build-character-weapon" id="selected-weapon">
+                        <img th:src="@{images/addToBuild.png}" alt="weapon">
+                        <select th:field="${build.weapon}" name="build-weapon" id="build-weapon">
+                            <option th:each="weapon : ${weapons}" th:value="${weapon}">
+                                <p th:text="${weapon.name}"></p>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="build-artifacts">
+                    <div id="flower-container">
+                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="${flower}" id="flower-slot">
+                            <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Flower')}" th:value="${artifact}">
+                                <p th:text="${artifact.artifactSet}"></p>
+                                <div th:each="substat : ${artifact.substats}">
+                                    <p th:text="${substat.statName}"></p>
+                                    <p th:text="${substat.statValue}"></p>
+                                </div>
+                            </option>
+                        </select>
+                    </div>
+                    <div id="plume-container">
+                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="${plume}" id="plume-slot">
+                            <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Plume')}" th:value="${artifact}">
+                                <p th:text="${artifact.artifactSet}"></p>
+                                <div th:each="substat : ${artifact.substats}">
+                                    <p th:text="${substat.statName}"></p>
+                                    <p th:text="${substat.statValue}"></p>
+                                </div>
+                            </option>
+                        </select>
+                    </div>
+                    <div id="sands-container">
+                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="${sands}" id="sands-slot">
+                            <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Sands')}" th:value="${artifact}">
+                                <p th:text="${artifact.artifactSet}"></p>
+                                <div th:each="substat : ${artifact.substats}">
+                                    <p th:text="${substat.statName}"></p>
+                                    <p th:text="${substat.statValue}"></p>
+                                </div>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="build-artifacts">
+                    <div id="goblet-container">
+                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="${goblet}" id="goblet-slot">
+                            <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Goblet')}" th:value="${artifact}">
+                                <p th:text="${artifact.artifactSet}"></p>
+                                <div th:each="substat : ${artifact.substats}">
+                                    <p th:text="${substat.statName}"></p>
+                                    <p th:text="${substat.statValue}"></p>
+                                </div>
+                            </option>
+                        </select>
+                    </div>
+                    <div id="circlet-container">
+                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="${circlet}" id="circlet-slot">
+                            <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Circlet')}" th:value="${artifact}">
+                                <p th:text="${artifact.artifactSet}"></p>
+                                <div th:each="substat : ${artifact.substats}">
+                                    <p th:text="${substat.statName}"></p>
+                                    <p th:text="${substat.statValue}"></p>
+                                </div>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div id="build-stats">
+                    <span class="stat-container dark-background">
+                        <p>HP</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container light-background">
+                        <p>Attack</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container dark-background">
+                        <p>Defense</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container light-background">
+                        <p>Elemental Mastery</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container dark-background">
+                        <p>HP Percent</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container light-background">
+                        <p>Attack Percent</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container dark-background">
+                        <p>Defense Percent</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container light-background">
+                        <p>Energy Recharge</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container dark-background">
+                        <p>Crit</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container light-background">
+                        <p>Crit Damage</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container dark-background">
+                        <p>Physical Damage Bonus</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container light-background">
+                        <p>Elemental Damage Bonus</p>
+                        <p></p>
+                    </span>
+                    <span class="stat-container dark-background">
+                        <p>Healing Bonus</p>
+                        <p></p>
+                    </span>
+                </div>
             </div>
-            <div class="build-artifacts">
-                <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder" id="goblet-slot">
-                <select th:field="${build.artifacts}">
-
-                </select>
-                <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder" id="circlet-slot">
-                <select th:field="${build.artifacts}">
-
-                </select>
-            </div>
-            <div id="build-stats">
-                <span class="stat-container dark-background">
-                    <p>HP</p>
-                    <p></p>
-                </span>
-                <span class="stat-container light-background">
-                    <p>Attack</p>
-                    <p></p>
-                </span>
-                <span class="stat-container dark-background">
-                    <p>Defense</p>
-                    <p></p>
-                </span>
-                <span class="stat-container light-background">
-                    <p>Elemental Mastery</p>
-                    <p></p>
-                </span>
-                <span class="stat-container dark-background">
-                    <p>HP Percent</p>
-                    <p></p>
-                </span>
-                <span class="stat-container light-background">
-                    <p>Attack Percent</p>
-                    <p></p>
-                </span>
-                <span class="stat-container dark-background">
-                    <p>Defense Percent</p>
-                    <p></p>
-                </span>
-                <span class="stat-container light-background">
-                    <p>Energy Recharge</p>
-                    <p></p>
-                </span>
-                <span class="stat-container dark-background">
-                    <p>Crit</p>
-                    <p></p>
-                </span>
-                <span class="stat-container light-background">
-                    <p>Crit Damage</p>
-                    <p></p>
-                </span>
-                <span class="stat-container dark-background">
-                    <p>Physical Damage Bonus</p>
-                    <p></p>
-                </span>
-                <span class="stat-container light-background">
-                    <p>Elemental Damage Bonus</p>
-                    <p></p>
-                </span>
-                <span class="stat-container dark-background">
-                    <p>Healing Bonus</p>
-                    <p></p>
-                </span>
-            </div>
+            <div class="flex-break"></div>
             <button type="submit">Save build</button>
         </form>
     </body>
