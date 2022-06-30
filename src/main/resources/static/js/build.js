@@ -28,6 +28,7 @@ var plume;
 var sands;
 var goblet;
 var circlet;
+var weaponEquipped = false;
 var artifactEquipped = {
     flower: false,
     plume: false,
@@ -363,7 +364,11 @@ function statUpdate(selector) {
             sheetStats.baseAttack = 0;
         }
         sheetStats.baseAttack += parseInt(weapon.baseAttack);
-        sheetStats["bonus"+String(weapon.statName).replace(" ", "").toLowerCase()] = parseFloat(weapon.statValue);
+        if(weaponEquipped) {
+            artifactStats["bonus"+String(weapon.statName).replace(" ", "").toUpperCase()] -= parseFloat(weapon.statValue);
+        }
+        weaponEquipped = true;
+        artifactStats["bonus"+String(weapon.statName).replace(" ", "").toUpperCase()] += parseFloat(weapon.statValue);
     }
     if(character != undefined) {
         for(var key in buildDom.statContainers) {
