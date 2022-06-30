@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityNotFoundException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,12 +34,11 @@ public class BuildController {
     }
 
     @GetMapping("")
-    public String buildOwned(Model model) {
-        //TODO: when implementing spring security this should use the principal
+    public String buildOwned(Model model, Principal principal) {
         Build build = new Build();
         model.addAttribute("build", build);
         try {
-            User user = userService.retrieveUser(1);
+            User user = userService.retrieveUser(userService.retrieveUser(principal.getName()).getId());
             model.addAttribute("user", user);
             model.addAttribute("characters", user.getCharacters());
             model.addAttribute("weapons", user.getWeapons());

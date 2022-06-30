@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -59,10 +60,25 @@ public class ArtifactService {
             } break;
         }
         ArtifactUtility.validateSubstats(substats.toArray(substatArray));
-        substatRepository.saveAll(substats);
-        mainstatRepository.save(mainstat);
-        artifact.setMainstat(mainstat);
-        artifact.setSubstats(substats);
+        Set<ArtifactSubstat> fixedSubstats = new LinkedHashSet<>();
+        substats.forEach(substat -> {
+            Optional<ArtifactSubstat> result = substatRepository.findByStatNameAndStatValue(substat.getStatName(), substat.getStatValue());
+            if(result.isEmpty()) {
+                fixedSubstats.add(substat);
+                substatRepository.save(substat);
+            } else {
+                fixedSubstats.add(result.get());
+            }
+        });
+        Optional<ArtifactMainstat> result = mainstatRepository.findByStatNameAndStatValue(mainstat.getStatName(), mainstat.getStatValue());
+        if(result.isEmpty()) {
+            mainstatRepository.save(mainstat);
+            artifact.setMainstat(mainstat);
+        }
+        else {
+            artifact.setMainstat(result.get());
+        }
+        artifact.setSubstats(fixedSubstats);
         artifact.setUser(userService.retrieveUser(id));
         artifactRepository.save(artifact);
     }

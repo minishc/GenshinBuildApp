@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
+import java.security.Principal;
 import java.util.ArrayList;
 
 @Controller
@@ -34,10 +35,13 @@ public class CharacterController {
     }
 
     @GetMapping("/characters")
-    public String showCharacters(Model model) {
-        //TODO: when implementing spring security set this to use the principal
-        User user = userService.retrieveUser(1);
-        UserDto dto = new UserDto(user.getId());
+    public String showCharacters(Model model, Principal principal) {
+        User user = new User();
+        UserDto dto = new UserDto();
+        if(principal != null) {
+            user = userService.retrieveUser(principal.getName());
+            dto = new UserDto(user.getId());
+        }
         dto.setCharacters(user.getCharacters());
         model.addAttribute("user", dto);
         model.addAttribute("characterList", characterService.retrieveCharacters());

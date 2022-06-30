@@ -22,7 +22,9 @@
                         </span>
                     </td>
                     <td>
-                        <form th:action="@{'/admin/deleteUser/'+${user.user.id}}" th:unless="${#lists.contains(authGroups, 'ROLE_ADMIN')}">DELETE</a>
+                        <span th:unless="${}">
+                            <form th:action="@{'/admin/deleteUser/'+${user.user.id}}"><button type="submit">Delete</button></form>
+                        </span>
                     </td>
                 </tr>
             </table>

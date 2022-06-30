@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +50,8 @@ public class ArtifactController {
     }
 
     @PostMapping("/artifacts/save")
-    public String saveArtifact(@ModelAttribute("artifactdto")ArtifactDto artifactDto) {
+    public String saveArtifact(@ModelAttribute("artifactdto")ArtifactDto artifactDto,
+                               Principal principal) {
         Set<ArtifactSubstat> substats = new LinkedHashSet<>();
         log.info(artifactDto.toString());
         Artifact artifact = new Artifact(artifactDto.getSlot(), artifactDto.getSet());
@@ -57,14 +59,16 @@ public class ArtifactController {
         for(int i = 1; i < 5; i++) {
             substats.add(new ArtifactSubstat(artifactDto.getStatNames()[i], artifactDto.getStatValues()[i]));
         }
-        artifactService.saveArtifact(1L, artifact, mainstat, substats);//TODO: When implementing security make this based on the principal
+        artifactService.saveArtifact(userService.retrieveUser(principal.getName()).getId(), artifact, mainstat, substats);
         return "redirect:/artifacts/save";
     }
 
     @PostMapping("/artifacts/upload")
-    public String parseUpload(@RequestParam("file-upload")MultipartFile file) {
+    public String parseUpload(@RequestParam("file-upload")MultipartFile file,
+                              Principal principal) {
+        User user = userService.retrieveUser(principal.getName());
         if(!file.isEmpty()) {
-            List<ArtifactDto> dtos = ArtifactUtility.parseFile(file, 1L);//TODO: When implementing security make this based on the principal
+            List<ArtifactDto> dtos = ArtifactUtility.parseFile(file, user.getId());
             artifactService.saveFromDtoList(dtos);
         }
         return "redirect:/artifacts";

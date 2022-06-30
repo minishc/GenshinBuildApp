@@ -35,7 +35,8 @@
                                         <h6 th:text="${#strings.replace(artifact.mainstat.statName, '%', '')}" class="stat-name"></h6>
                                         <h2 th:text="${#numbers.formatPercent(artifact.mainstat.statValue / 100, 1, 1)}"></h2>
                                     </span>
-                                    <span th:unless="${#strings.contains(artifact.mainstat.statName, 'Bonus')}">
+                                    <span th:unless="${#strings.contains(artifact.mainstat.statName, 'Bonus') or 
+                                                        #strings.contains(artifact.mainstat.statName, 'Recharge')}">
                                         <h6 th:text="${artifact.mainstat.statName}" class="stat-name"></h6>
                                         <h2 th:text="${#numbers.formatInteger(artifact.mainstat.statValue, 1, 'COMMA')}"></h2>
                                     </span>
@@ -72,7 +73,7 @@
                         </div>
                     </div>
                     <form th:action="@{'/artifacts/delete/'+${artifact.id}}" method="post">
-                        <button type="submit" style="margin-left: 5px;">Delete artifact</button>
+                        <button type="submit" style="margin-left: 5px; margin-top: 0px;">Delete artifact</button>
                     </form>
                 </div>
             </div>

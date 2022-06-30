@@ -5,6 +5,8 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -27,11 +29,12 @@ public class Artifact implements Serializable {
     String slot;
 
     @NotNull
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "mainstat_id")
     private ArtifactMainstat mainstat;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @Size(min = 4, max = 4)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "artifact_substats",
             joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id"))
@@ -41,6 +44,7 @@ public class Artifact implements Serializable {
     @ManyToMany(mappedBy = "artifacts")
     private Set<Build> builds = new LinkedHashSet<>();
 
+    @NotNull
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id")

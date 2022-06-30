@@ -16,6 +16,7 @@ import java.util.List;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"statName", "statValue"})})
 public class ArtifactSubstat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
