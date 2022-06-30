@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.LinkedHashSet;
@@ -25,8 +24,9 @@ import java.util.Set;
 @Slf4j
 public class ArtifactController {
 
-    private ArtifactService artifactService;
-    private UserService userService;
+    //services used in the controller to be autowired
+    private final ArtifactService artifactService;
+    private final UserService userService;
 
     @Autowired
     public ArtifactController(ArtifactService artifactService,
@@ -35,20 +35,33 @@ public class ArtifactController {
         this.userService = userService;
     }
 
+    /*
+        A mapping for showing all the artifacts that a User has uploaded
+     */
     @GetMapping("/artifacts")
-    public String artifactHome(Model model) {
-        User user = userService.retrieveUser(1);
+    public String artifactHome(Model model, Principal principal) {
+        User user = new User();
+        if(principal != null) {
+            user = userService.retrieveUser(principal.getName());
+        }
         model.addAttribute("user", user);
         model.addAttribute("artifacts", artifactService.retrieveArtifacts(user));
         return "artifacts";
     }
 
+    /*
+        Mapping for creating an artifact page, uses a dto because each artifact is a combination
+        of entries in 3 different tables
+     */
     @GetMapping("/artifacts/save")
     public String showForm(Model model) {
         model.addAttribute("artifactdto", new ArtifactDto());
         return "artifacts-save";
     }
 
+    /*
+        Mapping for submitting a single artifact upload
+     */
     @PostMapping("/artifacts/save")
     public String saveArtifact(@ModelAttribute("artifactdto")ArtifactDto artifactDto,
                                Principal principal) {
@@ -63,6 +76,9 @@ public class ArtifactController {
         return "redirect:/artifacts/save";
     }
 
+    /*
+        Mapping for submitting a csv file that uploads all artifacts in the file
+     */
     @PostMapping("/artifacts/upload")
     public String parseUpload(@RequestParam("file-upload")MultipartFile file,
                               Principal principal) {
@@ -74,6 +90,9 @@ public class ArtifactController {
         return "redirect:/artifacts";
     }
 
+    /*
+        Mapping for deleting an artifact
+     */
     @PostMapping("/artifacts/delete/{id}")
     public String deleteArtifact(@PathVariable("id") long id) {
         artifactService.deleteArtifact(id);

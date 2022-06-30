@@ -23,16 +23,25 @@ public class Artifact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    //Every artifact must be part of an artifact set and have a specific equip slot
     @NotNull @NonNull
     String artifactSet;
     @NotNull @NonNull
     String slot;
 
+    /*
+        Each artifact has a single mainstat, a single mainstat can appear on several different
+        artifacts
+     */
     @NotNull
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "mainstat_id")
     private ArtifactMainstat mainstat;
 
+    /*
+        Since all artifacts are assumed to be 5 stars at level 20 all artifacts should have
+        4 and only 4 substats, substats can appear on multiple artifacts.
+     */
     @Size(min = 4, max = 4)
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "artifact_substats",
@@ -40,16 +49,22 @@ public class Artifact implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id"))
     private Set<ArtifactSubstat> substats = new LinkedHashSet<>();
 
+    /*
+        Each build can have 0-5 artifacts (most likely 5). Each artifact can appear on any number
+        of builds
+     */
     @ToString.Exclude
     @ManyToMany(mappedBy = "artifacts")
     private Set<Build> builds = new LinkedHashSet<>();
 
+    //Each artifact MUST be attached to a user, a user can have many artifacts
     @NotNull
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    //auto generated equals and hashcode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

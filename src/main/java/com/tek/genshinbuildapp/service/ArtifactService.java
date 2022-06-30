@@ -36,10 +36,15 @@ public class ArtifactService {
         this.userService = userService;
     }
 
+    //simple Query method call
     public List<Artifact> retrieveArtifacts(User user) {
         return artifactRepository.findAllByUserId(user.getId());
     }
 
+    /*
+        Adjusts the slot name to be as it appears on the artifacts in game.
+        Then saves any new substats and mainstats, then the artifact itself
+     */
     public void saveArtifact(long id, Artifact artifact, ArtifactMainstat mainstat, Set<ArtifactSubstat> substats) {
         ArtifactSubstat[] substatArray = new ArtifactSubstat[4];
         switch(artifact.getSlot().toLowerCase()) {
@@ -61,6 +66,11 @@ public class ArtifactService {
         }
         ArtifactUtility.validateSubstats(substats.toArray(substatArray));
         Set<ArtifactSubstat> fixedSubstats = new LinkedHashSet<>();
+        /*
+            Since ArtifactSubstats have a unique constraint check the database for substats
+            that have the statName/statValue combination and put those into a new set
+            for saving with the artifact
+         */
         substats.forEach(substat -> {
             Optional<ArtifactSubstat> result = substatRepository.findByStatNameAndStatValue(substat.getStatName(), substat.getStatValue());
             if(result.isEmpty()) {
@@ -71,6 +81,10 @@ public class ArtifactService {
             }
         });
         Optional<ArtifactMainstat> result = mainstatRepository.findByStatNameAndStatValue(mainstat.getStatName(), mainstat.getStatValue());
+        /*
+            ArtifactMainstats also have a unique constraint so we first check if there is an existing entry
+            with the statName/statValue pair we need
+         */
         if(result.isEmpty()) {
             mainstatRepository.save(mainstat);
             artifact.setMainstat(mainstat);
@@ -78,11 +92,17 @@ public class ArtifactService {
         else {
             artifact.setMainstat(result.get());
         }
+        //after setting relationships, save the artifact
         artifact.setSubstats(fixedSubstats);
         artifact.setUser(userService.retrieveUser(id));
         artifactRepository.save(artifact);
     }
 
+    /*
+        This is a service method that is used when parsing an uploaded csv file,
+        it separates artifacts and converts data types and then calls the above
+        method for doing the saving
+     */
     public void saveFromDtoList(List<ArtifactDto> dtos) {
         for(ArtifactDto dto : dtos) {
             Set<ArtifactSubstat> substats = new LinkedHashSet<>();
@@ -95,6 +115,7 @@ public class ArtifactService {
         }
     }
 
+    //Simply deletes an artifact
     public void deleteArtifact(long id) {
         artifactRepository.deleteById(id);
     }

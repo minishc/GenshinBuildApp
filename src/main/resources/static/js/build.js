@@ -1,5 +1,6 @@
 window.onload = buildInit;
 
+//collecting dom elements for grabbing stats and updating images
 var buildDom = {
     collectDom: function() {
         this.buildCharacter = document.getElementById("build-character");
@@ -20,6 +21,7 @@ var buildDom = {
     }
 }
 
+//variables for storing stat update logic
 var sheetStats = {};
 var character;
 var weapon;
@@ -52,11 +54,15 @@ var artifactStats = {
     bonusHEALINGBONUS: 0
 }
 
+/*
+    buildInit function adds event listeners to the relevant DOM elements
+*/
 function buildInit() {
     init();
     console.log("Build script loaded");
     buildDom.collectDom();
 
+    //updates stat values/image when the character is changed checks for weapon compatibility
     buildDom.buildCharacter.addEventListener("click", () => {
         character = buildDom.buildCharacter.value;
         character = parse(character);
@@ -69,6 +75,7 @@ function buildInit() {
         verifyCompatibility();
     });
 
+    //updates stat variables/image when the weapon is changed
     buildDom.buildWeapon.addEventListener("click", () => {
         if(weapon != undefined) {
             sheetStats.baseAttack -= parseInt(weapon.baseAttack);
@@ -91,6 +98,7 @@ function buildInit() {
         }
     });
 
+    //updates stats/image when the flower artifact is set or changed
     buildDom.flowerSlot.addEventListener("click", () => {
         if(artifactEquipped.flower) {
             unequip(flower);
@@ -112,6 +120,7 @@ function buildInit() {
         statUpdate("artifact");
     });
 
+    //updates stats/image when the plume artifact is set or changed
     buildDom.plumeSlot.addEventListener("click", () => {
         if(artifactEquipped.plume) {
             unequip(plume);
@@ -133,6 +142,7 @@ function buildInit() {
         statUpdate("artifact");
     });
 
+    //updates stats/image when the sands artifact is changed
     buildDom.sandsSlot.addEventListener("click", () => {
         if(artifactEquipped.sands) {
             unequip(sands);
@@ -154,6 +164,7 @@ function buildInit() {
         statUpdate("artifact");
     });
 
+    //updates stats/images when the goblet artifact is changed
     buildDom.gobletSlot.addEventListener("click", () => {
         if(artifactEquipped.goblet) {
             unequip(goblet);
@@ -175,6 +186,7 @@ function buildInit() {
         statUpdate("artifact");
     });
 
+    //updates stats/image when the circlet artifact is set or changed
     buildDom.circletSlot.addEventListener("click", () => {
         if(artifactEquipped.circlet) {
             unequip(circlet);
@@ -199,6 +211,11 @@ function buildInit() {
     window.onload = init;
 }
 
+/*
+    Creates a way of displaying the artifact in the DOM when it is set,
+    shows an image of the artifact and stats.
+    There is an object used here that can be found in /resources/static/js/scripts.js
+*/
 function createArtifactDom(slot, set, artifact) {
     var image = document.createElement("img");
     var mainstat = document.createElement("p");
@@ -230,6 +247,9 @@ function createArtifactDom(slot, set, artifact) {
     buildDom[slot+"Container"].insertBefore(substat4, buildDom[slot+"Container"].lastElementChild);
 }
 
+/*
+    Parses a string obtained by thymeleaf binding into a js object
+*/
 function parse(item) {
     var firstKey = item.indexOf("(") + 1;
     var lastValue = item.indexOf(")");
@@ -247,6 +267,9 @@ function parse(item) {
     return result;
 }
 
+/*
+    Similar to the above but specifically for artifacts
+*/
 function parseArtifact(artifact) {
     var firstKey = artifact.indexOf("(") + 1;
     var lastValue = artifact.lastIndexOf(")");
@@ -306,6 +329,7 @@ function parseArtifact(artifact) {
     return result;
 }
 
+//verifies a character can equip a certain weapon
 function verifyCompatibility() {
     if(character != undefined && weapon != undefined) {
         if(character.weaponType != weapon.weaponType) {
@@ -319,6 +343,7 @@ function verifyCompatibility() {
     }
 }
 
+//changes the stats for an artifact
 function unequip(artifact) {
     artifactStats["bonus"+artifact.mainstat.statNameFixed] -= artifact.mainstat.statValue;
     for(var i = 0; i < 4; i++) {
@@ -326,6 +351,7 @@ function unequip(artifact) {
     }
 }
 
+//changes the stats for an artifact
 function equip(artifact) {
     artifactStats["bonus"+artifact.mainstat.statNameFixed] += artifact.mainstat.statValue;
     for(var i = 0; i < 4; i++) {
@@ -334,6 +360,10 @@ function equip(artifact) {
     artifactEquipped[artifact.slot.substring(0, artifact.slot.indexOf(" ")).toLowerCase()] = true;
 }
 
+/*
+    Updates all of the stats on the build page stat sheet based on what equipment
+    has been selected
+*/
 function statUpdate(selector) {
     if(selector == "character") {
         for(var key in character) {

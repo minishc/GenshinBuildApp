@@ -66,9 +66,9 @@ class ArtifactServiceTests {
 
     @Test
     @Order(2)
-    void deleteArtifact() {
+    void saveArtifact() {
         artifactService.saveArtifact(1, artifact, mainstat, substats);
-        verify(artifactSubstatRepository).saveAll(substats);
+        substats.forEach(substat -> verify(artifactSubstatRepository).save(substat));
         verify(artifactMainstatRepository).save(mainstat);
         verify(artifactRepository).save(artifact);
     }
