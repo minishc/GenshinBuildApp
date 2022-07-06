@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "genshin_character")
-public class Character {
+public class Character implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @Column(nullable = false)

@@ -1,9 +1,8 @@
 package com.tek.genshinbuildapp;
 
+import com.tek.genshinbuildapp.dao.AuthGroupRepository;
+import com.tek.genshinbuildapp.model.*;
 import com.tek.genshinbuildapp.model.Character;
-import com.tek.genshinbuildapp.model.User;
-import com.tek.genshinbuildapp.model.Weapon;
-import com.tek.genshinbuildapp.model.WeaponSecondaryStat;
 import com.tek.genshinbuildapp.service.CharacterService;
 import com.tek.genshinbuildapp.service.UserService;
 import com.tek.genshinbuildapp.service.WeaponSecondaryStatService;
@@ -24,6 +23,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
     private final WeaponSecondaryStatService secondaryStatService;
     private final WeaponService weaponService;
     private final UserService userService;
+    private final AuthGroupRepository authGroupRepository;
 
     private static final String SWORD = "Sword";
     private static final String BOW = "Bow";
@@ -52,11 +52,13 @@ public class AppCommandLineRunner implements CommandLineRunner {
     public AppCommandLineRunner(CharacterService characterService,
                                 WeaponSecondaryStatService secondaryStatService,
                                 WeaponService weaponService,
-                                UserService userService) {
+                                UserService userService,
+                                AuthGroupRepository authGroupRepository) {
         this.characterService = characterService;
         this.weaponService = weaponService;
         this.secondaryStatService = secondaryStatService;
         this.userService = userService;
+        this.authGroupRepository = authGroupRepository;
     }
 
     @Override
@@ -66,6 +68,8 @@ public class AppCommandLineRunner implements CommandLineRunner {
         populateWeapons();
         User user = new User(1, "Chris", "password");
         userService.saveUser(user);
+        authGroupRepository.save(new AuthGroup(user.getUsername(), "ROLE_ADMIN"));
+        authGroupRepository.save(new AuthGroup(user.getUsername(), "ROLE_USER"));
     }
 
     /**

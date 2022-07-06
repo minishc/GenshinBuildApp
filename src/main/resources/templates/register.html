@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <title>Genshin Build App</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <div th:replace="fragments/head :: head"></div>
 </head>
 
 <body>
-    <div class="nav-bar">
-        <a>Characters</a>
-        <a>Weapons</a>
-        <a>Builds</a>
-        <a href="../index.html">Home</a>
+    <div th:replace="fragments/nav-bar :: nav-bar"></div>
+    <div class="main-content">
+        <form th:action="@{/register}" method="post" th:object="${newUser}" id="register-form">
+            <h1>Register for an account</h1>
+            <div class="flex-break"></div>
+            <label for="username">Username :</label>
+            <input type="text" name="username" id="username" th:field="${newUser.username}" placeholder="Enter Username">
+            <div class="flex-break"></div>
+            <label for="enter-your-password">Password :</label>
+            <input type="password" name="enter-your-password" id="enter-your-password" placeholder="Enter Password" onfocus="verifyPassword()"
+                    onchange="verifyPassword()">
+            <div class="flex-break"></div>
+            <p id="password-message">Please enter a password of at least 8 characters.</p>
+            <div class="flex-break"></div>
+            <label for="confirm-password">Confirm Password :</label>
+            <input type="password" name="confirm-password" id="confirm-password" th:field="${newUser.password}"
+                    onfocus="verifyPassword()" onchange="verifyPassword()" placeholder="Confirm your password">
+            <div class="flex-break"></div>
+            <button type="submit" id="register-button" style="margin-top: 15px;" onmouseenter="verifyPassword()">Register</button>
+        </form>
     </div>
-    <div class="main-container"></div>
 </body>

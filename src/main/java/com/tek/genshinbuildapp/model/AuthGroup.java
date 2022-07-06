@@ -3,8 +3,10 @@ package com.tek.genshinbuildapp.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @NoArgsConstructor
@@ -15,15 +17,13 @@ import java.io.Serializable;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"statName", "statValue"})})
-public class ArtifactMainstat implements Serializable {
+public class AuthGroup implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    @NotNull
+    long id;
     @NonNull
-    String statName;
-    @NotNull
+    String username;
     @NonNull
-    double statValue;
+    String authority;
 }

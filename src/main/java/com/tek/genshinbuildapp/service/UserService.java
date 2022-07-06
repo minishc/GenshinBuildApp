@@ -3,12 +3,13 @@ package com.tek.genshinbuildapp.service;
 import com.tek.genshinbuildapp.dao.UserRepository;
 import com.tek.genshinbuildapp.model.Character;
 import com.tek.genshinbuildapp.model.User;
-import com.tek.genshinbuildapp.model.Weapon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -28,6 +29,20 @@ public class UserService {
         else {
             throw new EntityNotFoundException("No user with id: " + id);
         }
+    }
+
+    public User retrieveUser(String username) {
+        Optional<User> result = userRepository.findByUsername(username);
+        if(result.isPresent()) {
+            return result.get();
+        }
+        else {
+            throw new EntityNotFoundException("No user with username: " + username);
+        }
+    }
+
+    public List<User> retrieveUsers() {
+        return userRepository.findAll();
     }
 
     public void saveUser(User user) {

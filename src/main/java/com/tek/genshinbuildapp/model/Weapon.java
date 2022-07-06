@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.Set;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class Weapon {
+public class Weapon implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @NonNull

@@ -10,15 +10,14 @@
     <div class="main-content">
         <h1>Genshin Build App</h1>
         <p>
-            This app is for making builds for your Genshin Impact characters. You have the option of making
-            anonymous builds but currently those builds will not be saved when you leave the page. If you create
-            an account you can save your builds and add the characters, weapons, and artifacts that you own.
+            This app is for making builds for your Genshin Impact characters. Create
+            an account to make your builds and add the characters, weapons, and artifacts that you own.
         </p>
 
         <div id="start-a-build">
             <h2>Start a Build</h2>
             <div class="character-container">
-                <a th:href="@{/build(${character.name})}" th:each="character : ${characters}" style="margin: 6px;">
+                <a th:href="@{'/builds/character/'+${#strings.replace(character.name, ' ', '_')}}" th:each="character : ${characters}" style="margin: 6px;">
                     <div class="card-container">
                         <img th:src="${character.iconImage}" alt="${character.name}" class="character-thumb">
                         <p th:text="${character.name}"></p>

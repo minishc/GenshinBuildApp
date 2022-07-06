@@ -8,11 +8,12 @@
 }
 
 option {
-    font-family: genshinFont;;
+    font-family: genshinFont;
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     font-family: genshinFont;
     color: #FFFFFF;
     background-color: #262b50;
@@ -56,6 +57,7 @@ body {
     padding-right: 16px;
     font-size: 14px;
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 .nav-bar ul {
@@ -210,6 +212,7 @@ label {
 }
 
 button {
+    margin-top: 15px;
     color: #FFFFFF;
     width: 240px;
     height: 60px;
@@ -379,4 +382,25 @@ button {
 
 select {
     width: 150px;
+}
+
+#login-form {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+#register-form {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    min-height: 400px;
+}
+
+#register-form label {
+    width: 200px;
+}
+
+#users-table {
+    width: 100%;
 }

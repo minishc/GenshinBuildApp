@@ -20,6 +20,8 @@ public class UserDto {
 
     @NonNull
     long id;
+    String username;
+    String password;
     Set<Character> characters;
     Set<Weapon> weapons;
     Set<Artifact> artifacts;

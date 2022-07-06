@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <div th:replace="fragments/head :: head"></div>
-        <script defer th:src="@{js/build.js}" type="text/javascript"></script>
+        <script defer th:src="@{/js/build.js}" type="text/javascript"></script>
     </head>
 
     <body>
         <div th:replace="fragments/nav-bar :: nav-bar"></div>
         <form style="width: 60%; margin-left: 20%; margin-top: 40px; display: flex; justify-content: center; 
                             background-color: #202442; flex-flow: row wrap;"
-                 th:object="${build}" th:action="@{'/builds/'+${user.id}}" method="post">
+                 th:object="${build}" th:action="@{/builds}" method="post">
             <div id="build-content">
                 <div>
                     <div class="build-character-weapon" id="selected-character">
-                        <img th:src="@{images/addToBuild.png}" alt="character" id="placeholder-character"><br>
-                        <select th:field="${build.character}" name="build-character" id="build-character">
+                        <img th:src="@{/images/addToBuild.png}" alt="character" id="placeholder-character"><br>
+                        <select th:field="*{character}" name="build-character" id="build-character">
                             <option th:each="character : ${characters}" th:value="${character}">
                                 <p th:text="${character.name}"></p>
                             </option>
@@ -22,8 +22,8 @@
                         
                     </div>
                     <div class="build-character-weapon" id="selected-weapon">
-                        <img th:src="@{images/addToBuild.png}" alt="weapon">
-                        <select th:field="${build.weapon}" name="build-weapon" id="build-weapon">
+                        <img th:src="@{/images/addToBuild.png}" alt="weapon">
+                        <select th:field="*{weapon}" name="build-weapon" id="build-weapon">
                             <option th:each="weapon : ${weapons}" th:value="${weapon}">
                                 <p th:text="${weapon.name}"></p>
                             </option>
@@ -32,8 +32,8 @@
                 </div>
                 <div class="build-artifacts">
                     <div id="flower-container">
-                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
-                        <select th:field="${flower}" id="flower-slot">
+                        <img th:src="@{/images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="*{flower}" id="flower-slot">
                             <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Flower')}" th:value="${artifact}">
                                 <p th:text="${artifact.artifactSet}"></p>
                                 <div th:each="substat : ${artifact.substats}">
@@ -44,8 +44,8 @@
                         </select>
                     </div>
                     <div id="plume-container">
-                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
-                        <select th:field="${plume}" id="plume-slot">
+                        <img th:src="@{/images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="*{plume}" id="plume-slot">
                             <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Plume')}" th:value="${artifact}">
                                 <p th:text="${artifact.artifactSet}"></p>
                                 <div th:each="substat : ${artifact.substats}">
@@ -56,8 +56,8 @@
                         </select>
                     </div>
                     <div id="sands-container">
-                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
-                        <select th:field="${sands}" id="sands-slot">
+                        <img th:src="@{/images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="*{sands}" id="sands-slot">
                             <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Sands')}" th:value="${artifact}">
                                 <p th:text="${artifact.artifactSet}"></p>
                                 <div th:each="substat : ${artifact.substats}">
@@ -70,8 +70,8 @@
                 </div>
                 <div class="build-artifacts">
                     <div id="goblet-container">
-                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
-                        <select th:field="${goblet}" id="goblet-slot">
+                        <img th:src="@{/images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="*{goblet}" id="goblet-slot">
                             <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Goblet')}" th:value="${artifact}">
                                 <p th:text="${artifact.artifactSet}"></p>
                                 <div th:each="substat : ${artifact.substats}">
@@ -82,8 +82,8 @@
                         </select>
                     </div>
                     <div id="circlet-container">
-                        <img th:src="@{images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
-                        <select th:field="${circlet}" id="circlet-slot">
+                        <img th:src="@{/images/addToBuild.png}" alt="artifact" class="artifact-placeholder">
+                        <select th:field="*{circlet}" id="circlet-slot">
                             <option th:each="artifact : ${artifactList}" th:if="${#strings.contains(artifact.slot, 'Circlet')}" th:value="${artifact}">
                                 <p th:text="${artifact.artifactSet}"></p>
                                 <div th:each="substat : ${artifact.substats}">
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="flex-break"></div>
-            <button type="submit">Save build</button>
+            <button type="submit" id="form-submit">Save build</button>
         </form>
     </body>
 </html>
