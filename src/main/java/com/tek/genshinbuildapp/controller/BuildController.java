@@ -1,12 +1,11 @@
 package com.tek.genshinbuildapp.controller;
 
-import com.tek.genshinbuildapp.dto.ArtifactDto;
 import com.tek.genshinbuildapp.dto.BuildDto;
 import com.tek.genshinbuildapp.model.Artifact;
 import com.tek.genshinbuildapp.model.Build;
 import com.tek.genshinbuildapp.model.User;
-import com.tek.genshinbuildapp.service.ArtifactService;
 import com.tek.genshinbuildapp.service.BuildService;
+import com.tek.genshinbuildapp.service.CharacterService;
 import com.tek.genshinbuildapp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +26,15 @@ public class BuildController {
 
     private final UserService userService;
     private final BuildService buildService;
-
+    private final CharacterService characterService;
 
     @Autowired
     public BuildController(UserService userService,
-                           BuildService buildService) {
+                           BuildService buildService,
+                           CharacterService characterService) {
         this.userService = userService;
         this.buildService = buildService;
+        this.characterService = characterService;
     }
 
     @GetMapping("")
@@ -80,18 +81,41 @@ public class BuildController {
         buildToSave.setUser(user);
         buildToSave.setArtifacts(artifacts);
         buildService.saveBuild(buildToSave);
-        return "build";
+        return "redirect:/builds";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("user/{id}")
     public String builds(Model model, @PathVariable("id") long id) {
-        model.addAttribute("user", userService.retrieveUser(id));
+        //TODO: Build page with a user's builds
         return "my-builds";
     }
 
-    @GetMapping("/{characterName}")
-    public String buildWith(@PathVariable("characterName") String name) {
+    @GetMapping("character/{characterName}")
+    public String buildWith(@PathVariable("characterName") String name,
+                            Model model,
+                            Principal principal) {
         //TODO: send to a page to make a build with a specific character
-        return "redirect:/";
+        User user = new User();
+        try {
+            user = userService.retrieveUser(principal.getName());
+        }
+        catch(Exception exc) {
+            log.info("No user found with username: " + principal.getName());
+        }
+        String[] value = name.split("_");
+        StringBuilder adjustedName = new StringBuilder();
+        for(int i = 0; i < value.length; i++) {
+            if(i > 0) {
+                adjustedName.append(" ");
+            }
+            adjustedName.append(value[i]);
+        }
+        BuildDto build = new BuildDto();
+        build.setCharacter(characterService.findCharacterByName(adjustedName.toString()));
+        model.addAttribute("build", build);
+        model.addAttribute("characters", build.getCharacter());
+        model.addAttribute("weapons", user.getWeapons());
+        model.addAttribute("artifacts", user.getArtifacts());
+        return "build";
     }
 }
