@@ -19,6 +19,8 @@ public class Build implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    //TODO: Add naming for builds?
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "character_id", nullable = false)
     private Character character;

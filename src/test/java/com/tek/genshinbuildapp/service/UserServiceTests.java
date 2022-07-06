@@ -56,8 +56,4 @@ class UserServiceTests {
         userService.saveUser(user);
         verify(repository).save(user);
     }
-
-    @Test
-    void removeAllCharacters() {
-    }
 }

@@ -6,6 +6,8 @@ import com.tek.genshinbuildapp.dao.ArtifactSubstatRepository;
 import com.tek.genshinbuildapp.model.Artifact;
 import com.tek.genshinbuildapp.model.ArtifactMainstat;
 import com.tek.genshinbuildapp.model.ArtifactSubstat;
+import com.tek.genshinbuildapp.model.User;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,8 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.mockito.Mockito.verify;
@@ -40,6 +44,7 @@ class ArtifactServiceTests {
     static ArtifactSubstat substat4;
     static Set<ArtifactSubstat> substats;
     static Artifact artifact;
+    static User user;
 
     @BeforeAll
     static void setup() {
@@ -53,7 +58,9 @@ class ArtifactServiceTests {
         substats.add(substat2);
         substats.add(substat3);
         substats.add(substat4);
+        user = new User(1, "Chris", "Password");
         artifact = new Artifact("Emblem of the Severed Fates", "flower");
+        artifact.setUser(user);
         artifact.setMainstat(mainstat);
         artifact.setSubstats(substats);
     }
@@ -61,7 +68,10 @@ class ArtifactServiceTests {
     @Test
     @Order(1)
     void retrieveArtifacts() {
-
+        when(artifactRepository.findAllByUserId(artifact.getUser().getId())).thenReturn(List.of(artifact));
+        Assertions.assertThat(artifactService.retrieveArtifacts(artifact.getUser()))
+                .isNotNull().hasSize(1).containsOnly(artifact);
+        verify(artifactRepository).findAllByUserId(artifact.getUser().getId());
     }
 
     @Test

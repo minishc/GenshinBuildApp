@@ -1,22 +1,24 @@
 package com.tek.genshinbuildapp.controller;
 
+import com.tek.genshinbuildapp.dto.ArtifactDto;
+import com.tek.genshinbuildapp.dto.BuildDto;
 import com.tek.genshinbuildapp.model.Artifact;
 import com.tek.genshinbuildapp.model.Build;
-import com.tek.genshinbuildapp.model.Character;
 import com.tek.genshinbuildapp.model.User;
-import com.tek.genshinbuildapp.service.*;
+import com.tek.genshinbuildapp.service.ArtifactService;
+import com.tek.genshinbuildapp.service.BuildService;
+import com.tek.genshinbuildapp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Controller
 @Slf4j
@@ -24,36 +26,60 @@ import java.util.List;
 public class BuildController {
 
     private final UserService userService;
-    private final ArtifactService artifactService;
+    private final BuildService buildService;
 
 
     @Autowired
     public BuildController(UserService userService,
-                           ArtifactService artifactService) {
+                           BuildService buildService) {
         this.userService = userService;
-        this.artifactService = artifactService;
+        this.buildService = buildService;
     }
 
     @GetMapping("")
     public String buildOwned(Model model, Principal principal) {
-        Build build = new Build();
-        model.addAttribute("build", build);
+        BuildDto build = new BuildDto();
         try {
             User user = userService.retrieveUser(userService.retrieveUser(principal.getName()).getId());
-            model.addAttribute("user", user);
+            model.addAttribute("build", build);
             model.addAttribute("characters", user.getCharacters());
             model.addAttribute("weapons", user.getWeapons());
             model.addAttribute("artifactList", user.getArtifacts());
-            model.addAttribute("flower", new Artifact());
-            model.addAttribute("plume", new Artifact());
-            model.addAttribute("sands", new Artifact());
-            model.addAttribute("goblet", new Artifact());
-            model.addAttribute("circlet", new Artifact());
         }
         catch (EntityNotFoundException exc) {
             model.addAttribute("message", "There was an error retrieving user, characters, weapons" +
-                    ", or artifacts for user: " + userService.retrieveUser(1).getUsername());
+                    ", or artifacts for user: " + userService.retrieveUser(principal.getName()).getUsername());
         }
+        return "build";
+    }
+
+    @PostMapping("")
+    public String saveBuild(Model model,
+                            @ModelAttribute("build") BuildDto build,
+                            BindingResult result,
+                            Principal principal) {
+        if(result.hasErrors()) {
+            log.info(result.getAllErrors().toString());
+        }
+        Set<Artifact> artifacts = new LinkedHashSet<>();
+        artifacts.add(build.getFlower());
+        artifacts.add(build.getPlume());
+        artifacts.add(build.getSands());
+        artifacts.add(build.getGoblet());
+        artifacts.add(build.getCirclet());
+        Build buildToSave = new Build();
+        buildToSave.setWeapon(build.getWeapon());
+        buildToSave.setCharacter(build.getCharacter());
+        User user = new User();
+        try {
+            user = userService.retrieveUser(principal.getName());
+        }
+        catch(Exception exc) {
+            log.info("No user was logged in somehow");
+        }
+        buildToSave.setUser(user);
+        buildToSave.setArtifacts(artifacts);
+        buildService.saveBuild(buildToSave);
         return "build";
     }
 
@@ -61,5 +87,11 @@ public class BuildController {
     public String builds(Model model, @PathVariable("id") long id) {
         model.addAttribute("user", userService.retrieveUser(id));
         return "my-builds";
+    }
+
+    @GetMapping("/{characterName}")
+    public String buildWith(@PathVariable("characterName") String name) {
+        //TODO: send to a page to make a build with a specific character
+        return "redirect:/";
     }
 }

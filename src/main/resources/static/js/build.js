@@ -18,6 +18,7 @@ var buildDom = {
         this.gobletContainer = document.getElementById("goblet-container");
         this.circletSlot = document.getElementById("circlet-slot");
         this.circletContainer = document.getElementById("circlet-container");
+        this.submit = document.getElementById("form-submit");
     }
 }
 
@@ -72,7 +73,7 @@ function buildInit() {
         newImage.src = character.iconImage;
         newImage.alt = character.name;
         buildDom.characterContainer.insertBefore(newImage, buildDom.characterContainer.firstChild);
-        verifyCompatibility();
+        // verifyCompatibility();
     });
 
     //updates stat variables/image when the weapon is changed
@@ -207,6 +208,17 @@ function buildInit() {
         }
         statUpdate("artifact");
     });
+
+    buildDom.submit.addEventListener("click", () => {
+        buildDom.buildCharacter[buildDom.buildCharacter.selectedIndex].value = character.id;
+        buildDom.buildWeapon[buildDom.buildWeapon.selectedIndex].value = weapon.id;
+        buildDom.flowerSlot[buildDom.flowerSlot.selectedIndex].value = flower.id;
+        buildDom.plumeSlot[buildDom.plumeSlot.selectedIndex].value = plume.id;
+        buildDom.sandsSlot[buildDom.sandsSlot.selectedIndex].value = sands.id;
+        buildDom.gobletSlot[buildDom.gobletSlot.selectedIndex].value = goblet.id;
+        buildDom.circletSlot[buildDom.circletSlot.selectedIndex].value = circlet.id;
+    });
+
 
     window.onload = init;
 }

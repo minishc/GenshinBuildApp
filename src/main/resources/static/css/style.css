@@ -8,7 +8,7 @@
 }
 
 option {
-    font-family: genshinFont;;
+    font-family: genshinFont;
 }
 
 body {
@@ -394,6 +394,7 @@ select {
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
+    min-height: 400px;
 }
 
 #register-form label {
